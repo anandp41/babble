@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:babble/core/colors.dart';
 import 'package:babble/core/constant.dart';
+import 'package:babble/presentation/screens/auth/registration.dart';
 import 'package:flutter/material.dart';
 
 class ScreenGetStarted extends StatelessWidget {
@@ -32,6 +33,12 @@ class ScreenGetStarted extends StatelessWidget {
               width: width / 1.1,
               child: ElevatedButton(
                   onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegistrationScreen(),
+                        ),
+                        (route) => false);
                     log('Get Started Pressed');
                   },
                   style: ElevatedButton.styleFrom(
@@ -48,10 +55,9 @@ class ScreenGetStarted extends StatelessWidget {
                   child: Text(
                     getStarted,
                     style: const TextStyle(
-                      color: titleColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600
-                    ),
+                        color: titleColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
                   )),
             )
           ],
