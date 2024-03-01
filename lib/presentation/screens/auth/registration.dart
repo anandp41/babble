@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../core/colors.dart';
 import '../../../core/padding.dart';
 
+// ignore: must_be_immutable
 class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({super.key});
   var phoneNumberController = TextEditingController();
