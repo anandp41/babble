@@ -1,7 +1,8 @@
+import 'package:babble/presentation/screens/screen_get_started.dart';
+import 'package:babble/presentation/screens/screen_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'presentation/screens/auth/registration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: RegistrationScreen(),
+      home: const ScreenGetStarted (),
       debugShowCheckedModeBanner: false,
     );
   }
