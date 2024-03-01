@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:babble/presentation/common/appbar.dart';
 import 'package:babble/presentation/screens/auth/otpscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,9 +7,16 @@ import 'package:flutter/material.dart';
 import '../../../core/colors.dart';
 import '../../../core/padding.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   RegistrationScreen({super.key});
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
   var phoneNumberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +45,8 @@ class RegistrationScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: regOtpFieldBgColor,
                   borderRadius: BorderRadius.circular(8)),
-              child: TextFormField(
+              child: TextField(
+                keyboardType: TextInputType.number,
                 controller: phoneNumberController,
                 decoration: const InputDecoration(
                   contentPadding:
@@ -55,11 +65,20 @@ class RegistrationScreen extends StatelessWidget {
               onPressed: () async {
                 await FirebaseAuth.instance.verifyPhoneNumber(
                     verificationCompleted: (PhoneAuthCredential credential) {},
-                    verificationFailed: (FirebaseAuthException ex) {},
+                    verificationFailed: (FirebaseAuthException ex) {
+                      log(ex.toString());
+                    },
                     codeSent:
-                        (String verificationId, int? forceResendingToken) {},
+                        (String verificationId, int? forceResendingToken) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                OTPScreen(verificationId: verificationId),
+                          ));
+                    },
                     codeAutoRetrievalTimeout: (String verificationId) {},
-                    phoneNumber: phoneNumberController.text.trim());
+                    phoneNumber: "+91${phoneNumberController.text}");
               },
               style: ButtonStyle(
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -83,7 +102,8 @@ class RegistrationScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const OTPScreen(),
+                        builder: (context) =>
+                            OTPScreen(verificationId: "asdsds"),
                       ));
                 },
                 child: const Text("OTP"))

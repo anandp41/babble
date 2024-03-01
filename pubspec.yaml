@@ -34,6 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.10+1
+  pinput: ^4.0.0
   zego_uikit_prebuilt_live_audio_room: ^3.3.2
 
 dev_dependencies:
@@ -71,6 +72,5 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-        
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
