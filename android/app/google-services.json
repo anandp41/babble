@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953387577807",
+    "project_id": "babble-23d3e",
+    "storage_bucket": "babble-23d3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953387577807:android:aadd1ad5458d69e09fe2ba",
+        "android_client_info": {
+          "package_name": "com.anand.babble"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7-pRPlZ-wLEODMuQk29CjsbL7QlzVCdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
