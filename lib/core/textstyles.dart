@@ -16,7 +16,13 @@ const chatListTileNameTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w600,
         color: titleColor,
-        fontSize: 15),
+        fontSize: 16),
+    roomListTileNameTextStyle = TextStyle(
+        overflow: TextOverflow.ellipsis,
+        fontFamily: 'Hind',
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+        fontSize: 16),
     chatListTileLastMsgTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
@@ -26,14 +32,14 @@ const chatListTileNameTextStyle = TextStyle(
     chatListTileLastMsgTimeTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w500,
-        fontSize: 12,
+        fontSize: 14,
         color: chatListLastMsgTime),
     roomsListTileNameTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
         fontWeight: FontWeight.w600,
         color: titleColor,
-        fontSize: 15),
+        fontSize: 16),
     roomsListTileSpeakingTitleTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
@@ -125,4 +131,15 @@ const chatListTileNameTextStyle = TextStyle(
       fontFamily: 'Hind',
       fontWeight: FontWeight.w600,
       color: babbleTitleColor,
-    );
+    ),
+    floatingActionRoomAddButtonTextStyle = TextStyle(
+        color: Colors.white,
+        fontFamily: 'Hind',
+        fontWeight: FontWeight.w500,
+        fontSize: 16),
+    settingsNameSheetTextStyle =
+        TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'Hind'),
+    settingsButtonTS =
+        TextStyle(color: babbleTitleColor, fontSize: 14, fontFamily: 'Hind'),
+    settingsRedButtonTS =
+        TextStyle(color: Colors.red, fontSize: 14, fontFamily: 'Hind');

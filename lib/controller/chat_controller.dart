@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:babble/repositories/chat_repository.dart';
+import 'package:meta/meta.dart';
 
 import '../models/chat_contact.dart';
 import '../models/message.dart';
@@ -23,12 +24,20 @@ class ChatController {
     required this.chatRepository,
     required this.ref,
   });
+  Future<bool> doesThisUserExistNow({required String uid}) async {
+    return await chatRepository.doesThisUserExistNow(uid: uid);
+  }
+
   Stream<List<ChatContact>> chatContacts() {
     return chatRepository.getChatContacts();
   }
 
   Stream<List<Message>> chatStream(String receiverUserId) {
     return chatRepository.getChatStream(receiverUserId);
+  }
+
+  Future<String> getProfilePicOfAUser({required String userId}) async {
+    return chatRepository.getProfilePic(userId: userId);
   }
 
   void sendTextMessage(String text, String receiverUserId) {

@@ -32,7 +32,10 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
     return Scaffold(
       backgroundColor: bodyBackgroundColor,
       appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(80), child: CustomOTPAppBar()),
+          preferredSize: Size.fromHeight(80),
+          child: CustomOTPAppBar(
+            backArrow: false,
+          )),
       body: SafeArea(
           child: Padding(
         padding: regOtpScreenPadding,

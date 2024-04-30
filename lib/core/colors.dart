@@ -19,10 +19,8 @@ const bodyBackgroundColor = Color(0xFFE0D6D6),
     roomMemberNameTextColor = Color.fromARGB(255, 92, 89, 89),
     chatListTileLastMsgTextColor = Color(0xFF5E5151),
     roomsListTileSpeakingTitleTextColor = Color(0xFF958A8A),
-    roomMuteRedGradientColorsList = [
-      Color.fromRGBO(232, 31, 31, 1),
-      Color.fromRGBO(115, 8, 8, 1)
-    ],
+    roomMuteRedGradientColorsList = [Color(0xFFE81F1F), Color(0xFF730808)],
+    roomMuteGreenGradientColorsList = [Color(0xFF53E81F), Color(0xFF107308)],
     roomBackgroundGradientColorsList = [
       Color(0xFFE8DCDC),
       Color(0xFFA29F9F),
@@ -43,4 +41,7 @@ const bodyBackgroundColor = Color(0xFFE0D6D6),
     seenMsgTickColor = Colors.blue,
     myMessageNameColor = Colors.white,
     senderMessageReplyBgColor = Color(0xFFBDBDBD),
-    senderMessageNameColor = Colors.black;
+    senderMessageNameColor = Colors.black,
+    floatingActionButtonIconColor = Colors.white,
+    appbarBackButtonColor = Colors.white,
+    settingsNameSheetBg = Color.fromARGB(136, 55, 53, 53);

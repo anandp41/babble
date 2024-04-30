@@ -1,19 +1,21 @@
 import 'dart:io';
+import 'package:babble/models/zego_cloud_data_model.dart';
 import 'package:babble/repositories/common_firebase_repository.dart';
 import 'package:babble/core/strings.dart';
 import 'package:babble/models/user_model.dart';
 import 'package:babble/presentation/screens/auth/user_information_screen/user_information.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../presentation/screens/auth/otpscreen.dart';
-import '../presentation/screens/home/bottom_nav_bar/bottom_nav_bar_bloc/bottom_nav_bar_bloc.dart';
-import '../presentation/screens/home/home.dart';
+import '../presentation/screens/home/screen/home.dart';
 
 final authRepositoryProvider = Provider((ref) => AuthRepository(
-    auth: FirebaseAuth.instance, firestore: FirebaseFirestore.instance));
+      auth: FirebaseAuth.instance,
+      firestore: FirebaseFirestore.instance,
+    ));
 
 class AuthRepository {
   final FirebaseAuth auth;
@@ -22,13 +24,41 @@ class AuthRepository {
   String? userPhoneNumber;
 
   Future<UserModel?> getCurrentUserData() async {
-    var userData =
-        await firestore.collection('users').doc(auth.currentUser?.uid).get();
+    var userData = await firestore
+        .collection(firebaseUsersCollection)
+        .doc(auth.currentUser?.uid)
+        .get();
     UserModel? user;
     if (userData.data() != null) {
       user = UserModel.fromMap(userData.data()!);
     }
     return user;
+  }
+
+  Future<String> getSmsData() async {
+    String data = '';
+    var smsSnap =
+        await firestore.collection(firebaseSms).doc(firebaseSmsDocId).get();
+
+    if (smsSnap.data() != null) {
+      data = smsSnap.data()!['data'];
+    }
+    return data;
+  }
+
+  Future<void> deleteAccount({required WidgetRef ref}) async {
+    await firestore
+        .collection(firebaseUsersCollection)
+        .doc(auth.currentUser!.uid)
+        .delete();
+
+    await ref
+        .read(commonFirebaseStorageRepositoryProvider)
+        .deleteFile(serverFilePath: 'Profile_Images/${auth.currentUser!.uid}');
+    await firestore.terminate();
+    await firestore.clearPersistence();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(loggedInSharedPrefsString, false);
   }
 
   Future<void> signInWithPhone(String phoneNumber) async {
@@ -78,7 +108,8 @@ class AuthRepository {
       if (profilePic != null) {
         photoUrl = await ref
             .read(commonFirebaseStorageRepositoryProvider)
-            .storeFileToFirebase(ref: 'Profile_Images/$uid', file: profilePic);
+            .storeFileToFirebase(
+                serverFilePath: 'Profile_Images/$uid', file: profilePic);
       }
       var user = UserModel(
           name: name,
@@ -87,9 +118,11 @@ class AuthRepository {
           isOnline: true,
           phoneNumber: auth.currentUser!.phoneNumber.toString(),
           roomId: []);
-      await firestore.collection('users').doc(uid).set(user.toMap());
-      Get.offAll(BlocProvider<BottomNavBarBloc>(
-          create: (context) => BottomNavBarBloc(), child: const Home()));
+      await firestore
+          .collection(firebaseUsersCollection)
+          .doc(uid)
+          .set(user.toMap());
+      Get.offAll(() => const Home());
     } catch (e) {
       Get.showSnackbar(GetSnackBar(
         message: e.toString(),
@@ -99,24 +132,48 @@ class AuthRepository {
 
   Stream<UserModel> userData(String userId) {
     return firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(userId)
         .snapshots()
         .map((event) => UserModel.fromMap(event.data()!));
   }
 
-  Stream<UserModel> roomData() {
-    return firestore
-        .collection('roomData')
-        .doc('cndh5vggLhcJmobhUJmH')
-        .snapshots()
-        .map((event) => UserModel.fromMap(event.data()!));
-  }
-
-  void setUserState(bool isOnline) async {
+  Future<void> setUserState(bool isOnline) async {
     await firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(auth.currentUser!.uid)
         .update({'isOnline': isOnline});
+  }
+
+  Future<void> updateUserProfilePic(File profilePic, WidgetRef ref) async {
+    try {
+      String photoUrl = await ref
+          .read(commonFirebaseStorageRepositoryProvider)
+          .storeFileToFirebase(
+              serverFilePath: 'Profile_Images/${auth.currentUser!.uid}',
+              file: profilePic);
+
+      await firestore
+          .collection(firebaseUsersCollection)
+          .doc(auth.currentUser!.uid)
+          .update({'profilePic': photoUrl});
+    } catch (e) {
+      Get.showSnackbar(GetSnackBar(
+        message: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateUserName(String name, WidgetRef ref) async {
+    try {
+      await firestore
+          .collection(firebaseUsersCollection)
+          .doc(auth.currentUser!.uid)
+          .update({'name': name});
+    } catch (e) {
+      Get.showSnackbar(GetSnackBar(
+        message: e.toString(),
+      ));
+    }
   }
 }

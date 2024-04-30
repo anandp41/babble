@@ -11,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
+import '../core/strings.dart';
 import '../models/user_model.dart';
 
 final chatRepositoryProvider = Provider((ref) => ChatRepository(
@@ -20,9 +21,20 @@ class ChatRepository {
   final FirebaseFirestore firestore;
   final FirebaseAuth auth;
   ChatRepository({required this.firestore, required this.auth});
+
+  Future<bool> doesThisUserExistNow({required String uid}) async {
+    var data =
+        await firestore.collection(firebaseUsersCollection).doc(uid).get();
+    if (data.exists) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Stream<List<ChatContact>> getChatContacts() {
     return firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(auth.currentUser!.uid)
         .collection('chats')
         .orderBy('timeSent', descending: false)
@@ -38,6 +50,7 @@ class ChatRepository {
         var user = UserModel.fromMap(userData.data()!);
         contacts.add(ChatContact(
             name: user.name,
+            phoneNumber: user.phoneNumber,
             profilePic: user.profilePic,
             contactId: user.uid,
             timeSent: chatContact.timeSent,
@@ -65,6 +78,12 @@ class ChatRepository {
     });
   }
 
+  Future<String> getProfilePic({required String userId}) async {
+    var userDataMap = await firestore.collection('users').doc(userId).get();
+    var receiverUserData = UserModel.fromMap(userDataMap.data()!);
+    return receiverUserData.profilePic;
+  }
+
   void _saveDataToContactsSubCollection(
       {required UserModel senderUserData,
       required UserModel receiverUserData,
@@ -73,6 +92,7 @@ class ChatRepository {
       required String receiverUserId}) async {
     var receiverChatContact = ChatContact(
         name: senderUserData.name,
+        phoneNumber: senderUserData.phoneNumber,
         profilePic: senderUserData.profilePic,
         contactId: senderUserData.uid,
         timeSent: timeSent,
@@ -85,6 +105,7 @@ class ChatRepository {
         .set(receiverChatContact.toMap());
     var senderChatContact = ChatContact(
         name: receiverUserData.name,
+        phoneNumber: receiverChatContact.phoneNumber,
         profilePic: receiverUserData.profilePic,
         contactId: receiverUserData.uid,
         timeSent: timeSent,
@@ -195,7 +216,7 @@ class ChatRepository {
       String fileUrl = await ref
           .read(commonFirebaseStorageRepositoryProvider)
           .storeFileToFirebase(
-              ref:
+              serverFilePath:
                   'chat/${messageEnum.type}/${senderUserData.uid}/$receiverUserId/$messageId',
               file: file);
       UserModel receiverUserData;

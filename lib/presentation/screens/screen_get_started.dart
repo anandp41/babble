@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:babble/core/colors.dart';
 import 'package:babble/core/strings.dart';
 import 'package:babble/presentation/screens/auth/registration.dart';
@@ -34,7 +32,6 @@ class ScreenGetStarted extends StatelessWidget {
                           builder: (context) => const RegistrationScreen(),
                         ),
                         (route) => false);
-                    log('Get Started Pressed');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 18),

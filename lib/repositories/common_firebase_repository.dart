@@ -9,10 +9,16 @@ class CommonFirebaseStorageRepository {
   final FirebaseStorage firebaseStorage;
   CommonFirebaseStorageRepository({required this.firebaseStorage});
   Future<String> storeFileToFirebase(
-      {required String ref, required File file}) async {
-    UploadTask uploadTask = firebaseStorage.ref().child(ref).putFile(file);
+      {required String serverFilePath, required File file}) async {
+    UploadTask uploadTask =
+        firebaseStorage.ref().child(serverFilePath).putFile(file);
     TaskSnapshot taskSnapshot = await uploadTask;
+    // firebaseStorage.ref().child(serverFilePath).delete();
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
     return downloadUrl;
+  }
+
+  Future<void> deleteFile({required String serverFilePath}) async {
+    await firebaseStorage.ref().child(serverFilePath).delete();
   }
 }

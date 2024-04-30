@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:babble/core/colors.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:flutter/foundation.dart';
+//import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter/material.dart';
 
 class DocViewer extends StatefulWidget {
@@ -13,8 +11,6 @@ class DocViewer extends StatefulWidget {
 }
 
 class _DocViewerState extends State<DocViewer> {
-  Uint8List? _documentBytes;
-
   @override
   void initState() {
     getPdfBytes();
@@ -22,11 +18,7 @@ class _DocViewerState extends State<DocViewer> {
   }
 
   void getPdfBytes() async {
-    HttpClient client = HttpClient();
-    final Uri url = Uri.base.resolve(widget.path);
-    final HttpClientRequest request = await client.getUrl(url);
-    final HttpClientResponse response = await request.close();
-    _documentBytes = await consolidateHttpClientResponseBytes(response);
+    Uri.base.resolve(widget.path);
     setState(() {});
   }
 
@@ -36,11 +28,11 @@ class _DocViewerState extends State<DocViewer> {
         child: CircularProgressIndicator(
       color: babbleTitleColor,
     ));
-    if (_documentBytes != null) {
-      child = SfPdfViewer.memory(
-        _documentBytes!,
-      );
-    }
+    // if (_documentBytes != null) {
+    //   child = SfPdfViewer.memory(
+    //     _documentBytes!,
+    //   );
+    // }
     return Scaffold(
       backgroundColor: bodyBackgroundColor,
       appBar: AppBar(title: const Text('PDF Viewer')),

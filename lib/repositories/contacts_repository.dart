@@ -13,7 +13,7 @@ class ContactsRepository {
   final FirebaseFirestore firestore;
   ContactsRepository({required this.firestore});
 
-  Future<List<Map<String, String>>> getContacts() async {
+  Future<List<Contact>> getContacts() async {
     List<Contact> contacts = [];
     try {
       if (await FlutterContacts.requestPermission()) {
@@ -23,12 +23,39 @@ class ContactsRepository {
       debugPrint(e.toString());
     }
 
-    var result = await checkIfOnBabble(contacts);
-    return result;
+    // var result = await checkIfOnBabble(contacts);
+    // return result;
+    return contacts;
   }
 
-  Future<List<Map<String, String>>> checkIfOnBabble(
-      List<Contact> contacts) async {
+  Future<String> ifSavedContactName(
+      {required String phoneNumberFromServerToCheck}) async {
+    String name = phoneNumberFromServerToCheck;
+    List<Contact> contacts = await getContacts();
+    bool found = false;
+    for (var contact in contacts) {
+      if (contact.phones.isEmpty) {
+        continue;
+      }
+      for (var eachPhoneOfAContact in contact.phones) {
+        if (phoneNumberFromServerToCheck
+            .replaceAll(' ', '')
+            .contains(eachPhoneOfAContact.number.replaceAll(' ', ''))) {
+          name = contact.displayName;
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        break;
+      }
+    }
+
+    return name;
+  }
+
+  Future<List<Map<String, String>>> checkIfOnBabble() async {
+    List<Contact> contacts = await getContacts();
     List<Map<String, String>> resultContacts = [];
 
     var userCollection = await firestore.collection('users').get();
@@ -94,6 +121,7 @@ class ContactsRepository {
 
   //           Get.to(() => ChatScreen(
   //               name: selectedContact.displayName,
+  //               phoneNumber: selectedContact.phones,
   //               uid: userData.uid,
   //               profilePic: userData.profilePic));
   //         }

@@ -1,18 +1,22 @@
 import 'dart:io';
 
+import 'package:babble/models/zego_cloud_data_model.dart';
 import 'package:babble/repositories/auth_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/user_model.dart';
 
-final authControllerProvider = Provider((ref) {
-  final authRepository = ref.watch(authRepositoryProvider);
-  return AuthController(authRepository: authRepository, ref: ref);
-});
-
 final userDataAuthProvider = FutureProvider((ref) async {
   final authController = ref.watch(authControllerProvider);
   return await authController.getUserData();
+});
+final smsDataProvider = FutureProvider((ref) async {
+  final authController = ref.watch(authControllerProvider);
+  return await authController.getSmsData();
+});
+final authControllerProvider = Provider((ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  return AuthController(authRepository: authRepository, ref: ref);
 });
 
 class AuthController {
@@ -21,6 +25,16 @@ class AuthController {
   AuthController({required this.ref, required this.authRepository});
   Future<void> signInWithPhone(String phoneNumber) async {
     await authRepository.signInWithPhone(phoneNumber);
+  }
+
+  Future<void> updateUserProfilePic(
+      {required File profilePic, required WidgetRef ref}) async {
+    await authRepository.updateUserProfilePic(profilePic, ref);
+  }
+
+  Future<void> updateUserName(
+      {required String name, required WidgetRef ref}) async {
+    await authRepository.updateUserName(name, ref);
   }
 
   Future<void> verifyOTP(
@@ -41,11 +55,20 @@ class AuthController {
     return user;
   }
 
+  Future<String> getSmsData() async {
+    String data = await authRepository.getSmsData();
+    return data;
+  }
+
+  Future<void> deleteAccountPermanenlty({required WidgetRef ref}) async {
+    await authRepository.deleteAccount(ref: ref);
+  }
+
   Stream<UserModel> userDataById(String userId) {
     return authRepository.userData(userId);
   }
 
-  void setUserState(bool isOnline) async {
-    authRepository.setUserState(isOnline);
+  Future<void> setUserState(bool isOnline) async {
+    await authRepository.setUserState(isOnline);
   }
 }

@@ -4,7 +4,8 @@ import '../../../core/colors.dart';
 import '../../screens/common/appbar_back_button.dart';
 
 class CustomOTPAppBar extends StatelessWidget {
-  const CustomOTPAppBar({super.key});
+  final bool backArrow;
+  const CustomOTPAppBar({super.key, this.backArrow = true});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,8 @@ class CustomOTPAppBar extends StatelessWidget {
             height: 5),
       ),
       centerTitle: true,
-      automaticallyImplyLeading: true,
-      leading: const AppBarBackButton(),
+      //automaticallyImplyLeading: false,
+      leading: backArrow ? const AppBarBackButton() : null,
     );
   }
 }
