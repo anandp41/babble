@@ -44,7 +44,7 @@ const chatListTileNameTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
         fontWeight: FontWeight.w500,
-        fontSize: 12,
+        fontSize: 14,
         color: roomsListTileSpeakingTitleTextColor),
     roomAppBarLeaveTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
@@ -72,7 +72,7 @@ const chatListTileNameTextStyle = TextStyle(
     roomControlMembersTitleTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w400,
-        color: Colors.black,
+        color: Colors.white,
         fontSize: 20),
     registrationPhoneNumberTextStyle =
         TextStyle(fontFamily: 'Urbanist', fontSize: 15, color: otpSubColor),
@@ -120,6 +120,11 @@ const chatListTileNameTextStyle = TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 16,
     ),
+    chatDateTextStyle = TextStyle(
+        fontFamily: 'Hind',
+        fontWeight: FontWeight.w400,
+        color: Colors.white70,
+        fontSize: 12),
     chatAppBarTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
@@ -143,3 +148,8 @@ const chatListTileNameTextStyle = TextStyle(
         TextStyle(color: babbleTitleColor, fontSize: 14, fontFamily: 'Hind'),
     settingsRedButtonTS =
         TextStyle(color: Colors.red, fontSize: 14, fontFamily: 'Hind');
+TextStyle linkStyle = const TextStyle(color: Color.fromARGB(255, 20, 109, 182));
+TextStyle defaultStyle = const TextStyle(
+  color: Colors.white,
+  fontSize: 16.0,
+);

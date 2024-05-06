@@ -9,8 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
-/lib/core/keys.dart
-/lib/utils/utils.dart
+lib/config/zego_cloud_config.dart
 # IntelliJ related
 *.iml
 *.ipr

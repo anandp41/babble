@@ -24,6 +24,7 @@ dependencies:
   flutter_contacts: ^1.1.7+1
   flutter_riverpod: 2.0.0-dev.9
   flutter_sound_record: ^3.3.2
+  flutter_super_html_viewer: ^0.1.0
   flutter_switch: ^0.3.2
   get: ^4.6.6
   image_picker: ^1.0.7
@@ -38,6 +39,7 @@ dependencies:
   pinput: ^4.0.0
   shared_preferences: ^2.2.3
   swipe_to: ^1.0.2
+  transparent_image: ^2.0.1
   url_launcher: ^6.2.6
   uuid: 3.0.7
   zego_express_engine: ^3.13.3

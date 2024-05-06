@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 //Registration and OTP
-const otpVerifyButtonBg = Color(0xFF9E8585);
-
+const otpVerifyButtonBg = Color.fromARGB(255, 105, 113, 146);
+const chatScreenDateBg = Color.fromARGB(255, 87, 88, 89);
 //InApp
-const bodyBackgroundColor = Color(0xFFE0D6D6),
+const bodyBackgroundColor =
+//Color(0xFFE0D6D6)
+        Color.fromARGB(255, 105, 104, 101),
+    bottomNavBarColor = Color(0xFF1F384F),
     otpSubColor = Color(0xFF838BA1),
     regTitleColor = Color.fromRGBO(30, 35, 44, 1),
     kWhite = Colors.white,
@@ -13,20 +16,22 @@ const bodyBackgroundColor = Color(0xFFE0D6D6),
     titleColor = Color.fromRGBO(7, 24, 85, 1),
     buttonBorder = Color.fromARGB(255, 30, 35, 44),
     babbleTitleColor = Color.fromRGBO(7, 24, 85, 1),
-    searchBoxBg = Color(0xFF9B9A9A),
-    searchBoxTextColor = Color(0xFF706B6B),
+    searchBoxBg = Color.fromARGB(255, 118, 117, 117),
+    searchBoxTextColor = Color.fromARGB(255, 162, 159, 159),
     chatListLastMsgTime = Colors.black,
     roomMemberNameTextColor = Color.fromARGB(255, 92, 89, 89),
-    chatListTileLastMsgTextColor = Color(0xFF5E5151),
-    roomsListTileSpeakingTitleTextColor = Color(0xFF958A8A),
+    chatListTileLastMsgTextColor = Color.fromARGB(255, 237, 234, 234),
+    roomsListTileSpeakingTitleTextColor = Color.fromARGB(255, 237, 234, 234),
     roomMuteRedGradientColorsList = [Color(0xFFE81F1F), Color(0xFF730808)],
     roomMuteGreenGradientColorsList = [Color(0xFF53E81F), Color(0xFF107308)],
     roomBackgroundGradientColorsList = [
       Color(0xFFE8DCDC),
       Color(0xFFA29F9F),
     ],
-    roomControlCloseRoomButtonColor = Color(0xFFC62222),
-    roomControlMembersListBgColor = Color(0xFFA69999),
+    roomBgGradientList = [Color(0xFFA29F9F), Color(0xFFE8DCDC)],
+    roomControlCloseRoomButtonRedColor = Color(0xFFC62222),
+    roomControlCloseRoomButtonGreenColor = Colors.green,
+    roomControlMembersListBgColor = Color.fromARGB(255, 139, 153, 167),
     roomControlMuteAllBg = Color(0xFF9B9A9A),
     roomControlInactiveMuteBg = Color(0xFF837D7D),
     roomControlActiveMuteBg = Color(0xFFBB2828),
@@ -44,4 +49,7 @@ const bodyBackgroundColor = Color(0xFFE0D6D6),
     senderMessageNameColor = Colors.black,
     floatingActionButtonIconColor = Colors.white,
     appbarBackButtonColor = Colors.white,
-    settingsNameSheetBg = Color.fromARGB(136, 55, 53, 53);
+    settingsNameSheetBg = Color.fromARGB(255, 55, 53, 53),
+    profilePicViewerBg = Colors.black,
+    profilePicViewerTitleColor = Colors.white,
+    profilePicViewerNoImageColor = Colors.white30;

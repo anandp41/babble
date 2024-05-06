@@ -13,6 +13,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   permission_handler_windows
   smart_auth
   url_launcher_windows
+  webview_windows
   zego_express_engine
   zego_zim
 )

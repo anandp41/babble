@@ -7,16 +7,17 @@ class RoomModel {
   final String roomPic;
   final List<String> speakingPhoneNumbers;
   final List<String> membersUid;
-  RoomModel({
-    required this.name,
-    required this.creatorUid,
-    required this.creatorNumber,
-    required this.hostUid,
-    required this.roomId,
-    required this.roomPic,
-    required this.speakingPhoneNumbers,
-    required this.membersUid,
-  });
+  final bool isRoomClosed;
+  RoomModel(
+      {required this.name,
+      required this.creatorUid,
+      required this.creatorNumber,
+      required this.hostUid,
+      required this.roomId,
+      required this.roomPic,
+      required this.speakingPhoneNumbers,
+      required this.membersUid,
+      required this.isRoomClosed});
 
   Map<String, dynamic> toMap() {
     return {
@@ -28,6 +29,7 @@ class RoomModel {
       'roomPic': roomPic,
       'speakingPhoneNumbers': speakingPhoneNumbers,
       'membersUid': membersUid,
+      'isRoomClosed': isRoomClosed,
     };
   }
 
@@ -36,11 +38,12 @@ class RoomModel {
       name: map['name'] ?? '',
       creatorUid: map['creatorUid'] ?? '',
       creatorNumber: map['creatorNumber'] ?? '',
-      hostUid: map["hostUid"] ?? '',
+      hostUid: map['hostUid'] ?? '',
       roomId: map['roomId'] ?? '',
       roomPic: map['roomPic'] ?? '',
       speakingPhoneNumbers: List<String>.from(map['speakingPhoneNumbers']),
       membersUid: List<String>.from(map['membersUid']),
+      isRoomClosed: map['isRoomClosed'] ?? false,
     );
   }
 }
