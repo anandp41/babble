@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:babble/features/chat/widgets/audio_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:babble/common/enums/message_enum.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -32,7 +33,6 @@ class DisplayTextImageGIF extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isPlaying = false;
     final audioplayer = AudioPlayer();
 
     return type == MessageEnum.text
@@ -44,24 +44,18 @@ class DisplayTextImageGIF extends StatelessWidget {
           )
         : type == MessageEnum.audio
             ? StatefulBuilder(builder: (context, setState) {
-                return IconButton(
-                    constraints: const BoxConstraints(minWidth: 100),
-                    onPressed: () async {
-                      if (isPlaying) {
-                        await audioplayer.pause();
-                        setState(() {
-                          isPlaying = false;
-                        });
-                      } else {
-                        setState(() {
-                          isPlaying = true;
-                        });
-                        await audioplayer.play(UrlSource(message),
-                            mode: PlayerMode.lowLatency);
-                      }
-                    },
-                    icon: Icon(
-                        isPlaying ? Icons.pause_circle : Icons.play_circle));
+                audioplayer
+                  ..setSourceUrl(message)
+                  ..setPlayerMode(PlayerMode.mediaPlayer)
+                  ..setReleaseMode(ReleaseMode.stop);
+
+                return SizedBox(
+                    width: 160,
+                    height: 120,
+                    child: PlayerWidget(
+                      player: audioplayer,
+                      isMyMessage: isMyMessage,
+                    ));
               })
             : type == MessageEnum.video
                 ? VideoPlayerItem(videoUrl: message)

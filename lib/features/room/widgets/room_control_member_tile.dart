@@ -29,16 +29,7 @@ class RoomControlMemberTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool nameFound = false;
     String name = '';
-    // return FutureBuilder(
-    //   future: ref.watch(roomControllerProvider).getDetailsOfRoom(roomId),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return const Center(
-    //           child: CircularProgressIndicator(
-    //         color: Colors.red,
-    //       ));
-    //     }
-    //     var roomData = snapshot.data;
+
     return ref.read(userDataAuthProvider).when(
         data: (currentUserData) {
           return InkWell(
@@ -112,40 +103,6 @@ class RoomControlMemberTile extends ConsumerWidget {
                           currentUserData.uid != userData.uid
                       ? Row(
                           children: [
-                            // Container(
-                            //   height: 40,
-                            //   decoration: const BoxDecoration(
-                            //       color: roomControlInactiveMuteBg,
-                            //       shape: BoxShape.circle),
-                            //   child: IconButton(
-                            //     onPressed: () {
-                            //       if (roomData.mutedMembersUid
-                            //           .contains(userData.uid)) {
-                            //         ref
-                            //             .read(roomControllerProvider)
-                            //             .unMuteAMember(
-                            //                 roomId: roomId,
-                            //                 memberId: userData.uid);
-                            //       } else {
-                            //         ref
-                            //             .read(roomControllerProvider)
-                            //             .muteAMember(
-                            //                 roomId: roomId,
-                            //                 memberId: userData.uid);
-                            //       }
-                            //       ref.refresh(roomControllerProvider);
-                            //     },
-                            //     icon: Icon(roomData.mutedMembersUid
-                            //             .contains(userData.uid)
-                            //         ? Icons.mic_off_outlined
-                            //         : Icons.mic_none_outlined),
-                            //     iconSize: 30,
-                            //     color: Colors.white,
-                            //   ),
-                            // ),
-                            // const SizedBox(
-                            //   width: 15,
-                            // ),
                             Container(
                               width: 50,
                               height: 50,
