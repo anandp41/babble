@@ -7,7 +7,7 @@ import 'package:babble/features/room/repositories/room_repository.dart';
 import '../../../models/room_model.dart';
 
 final roomControllerProvider = Provider((ref) {
-  final roomRepository = ref.read(roomRepositoryProvider);
+  final roomRepository = ref.watch(roomRepositoryProvider);
   return RoomController(roomRepository: roomRepository, ref: ref);
 });
 
@@ -74,4 +74,7 @@ class RoomController {
   Future<void> deleteRoomPhoto(
           {required WidgetRef ref, required String roomId}) async =>
       await roomRepository.deleteRoomPhoto(roomId: roomId, ref: ref);
+  Stream<List<String>>? getSpeakersStreamOfRoom({required String roomId}) {
+    return roomRepository.getSpeakersStreamOfRoom(roomId);
+  }
 }

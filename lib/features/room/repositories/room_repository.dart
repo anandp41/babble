@@ -238,4 +238,16 @@ class RoomRepository {
     var roomData = RoomModel.fromMap(roomDataMap.data()!);
     return roomData;
   }
+
+  Stream<List<String>>? getSpeakersStreamOfRoom(String roomId) {
+    return firestore
+        .collection('rooms')
+        .doc(roomId)
+        .snapshots()
+        .asyncMap((event) {
+      var room = RoomModel.fromMap(event.data()!);
+      List<String> speakers = room.speakingPhoneNumbers;
+      return speakers;
+    });
+  }
 }
