@@ -1,10 +1,10 @@
-import 'package:babble/core/misc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:babble/models/room_model.dart';
 import '../../../../../../../core/radii.dart';
 import '../../../../../../../core/strings.dart';
 import '../../../../../../../models/user_model.dart';
+import '../../../common/functions/functions.dart';
 import '../../chat/widgets/profile_pic_viewer.dart';
 import '../screens/room.dart';
 import 'room_list_tile_name_field.dart';
@@ -24,10 +24,7 @@ class RoomsListTile extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (roomData.hostUid != userData!.uid && roomData.isRoomClosed) {
-          Get.showSnackbar(const GetSnackBar(
-            duration: snackbarDuration,
-            message: "Room currently closed by the host",
-          ));
+          showCustomSnackBar(message: "Room currently closed by the host");
         } else {
           Get.to(
             () => Room(roomData: roomData, userData: userData),

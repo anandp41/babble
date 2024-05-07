@@ -1,6 +1,6 @@
+import 'package:babble/features/settings/widgets/pp_and_tc_viewer_holder_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
 import 'package:get/get.dart';
 
 import '../../../core/colors.dart';
@@ -23,11 +23,8 @@ class TandCButton extends StatelessWidget {
     return InkWell(
       onTap: () async {
         var pptcData = await ref.read(pPTCDataControllerProvider).getData();
-        Get.to(() => HtmlContentViewer(
-              htmlContent: pptcData[firebaseTermsAndConditionsDocument]!,
-              initialContentHeight: screenSize.height,
-              initialContentWidth: screenSize.width,
-            ));
+        Get.to(() => PrivacyPolicyTermsConditionsViewerHolderScaffold(
+            data: pptcData[firebaseTermsAndConditionsDocument]!));
       },
       child: const ListTile(
         leading: Icon(

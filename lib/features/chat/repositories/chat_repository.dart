@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 import '../../../../../core/strings.dart';
 import '../../../../../models/user_model.dart';
 import '../../../common/enums/message_enum.dart';
+import '../../../common/functions/functions.dart';
 import '../../../common/providers/message_reply_provider.dart';
 import '../../../common/repositories/common_firebase_repository.dart';
 import '../../../core/misc.dart';
@@ -35,7 +36,7 @@ class ChatRepository {
     return firestore
         .collection(firebaseUsersCollection)
         .doc(auth.currentUser!.uid)
-        .collection('chats')
+        .collection(firebaseChatsCollection)
         .orderBy('timeSent', descending: false)
         .snapshots()
         .asyncMap((event) async {
@@ -43,7 +44,7 @@ class ChatRepository {
       for (var document in event.docs) {
         var chatContact = ChatContact.fromMap(document.data());
         var userData = await firestore
-            .collection('users')
+            .collection(firebaseUsersCollection)
             .doc(chatContact.contactId)
             .get();
         var user = UserModel.fromMap(userData.data()!);
@@ -61,11 +62,11 @@ class ChatRepository {
 
   Stream<List<Message>> getChatStream(String receiverUserId) {
     return firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(auth.currentUser!.uid)
-        .collection('chats ')
+        .collection(firebaseChatsCollection)
         .doc(receiverUserId)
-        .collection('messages')
+        .collection(firebaseMessagesCollection)
         .orderBy('timeSent')
         .snapshots()
         .map((event) {
@@ -78,7 +79,8 @@ class ChatRepository {
   }
 
   Future<String> getProfilePic({required String userId}) async {
-    var userDataMap = await firestore.collection('users').doc(userId).get();
+    var userDataMap =
+        await firestore.collection(firebaseUsersCollection).doc(userId).get();
     var receiverUserData = UserModel.fromMap(userDataMap.data()!);
     return receiverUserData.profilePic;
   }
@@ -97,9 +99,9 @@ class ChatRepository {
         timeSent: timeSent,
         lastMessage: text);
     await firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(receiverUserId)
-        .collection('chats')
+        .collection(firebaseChatsCollection)
         .doc(auth.currentUser!.uid)
         .set(receiverChatContact.toMap());
     var senderChatContact = ChatContact(
@@ -110,9 +112,9 @@ class ChatRepository {
         timeSent: timeSent,
         lastMessage: text);
     await firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(auth.currentUser!.uid)
-        .collection('chats')
+        .collection(firebaseChatsCollection)
         .doc(receiverUserId)
         .set(senderChatContact.toMap());
   }
@@ -146,18 +148,18 @@ class ChatRepository {
           messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );
     await firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(auth.currentUser!.uid)
-        .collection('chats ')
+        .collection(firebaseChatsCollection)
         .doc(receiverUserId)
         .collection('messages')
         .doc(messageId)
         .set(message.toMap());
 
     await firestore
-        .collection('users')
+        .collection(firebaseUsersCollection)
         .doc(receiverUserId)
-        .collection('chats ')
+        .collection(firebaseChatsCollection)
         .doc(auth.currentUser!.uid)
         .collection('messages')
         .doc(messageId)
@@ -173,8 +175,10 @@ class ChatRepository {
     try {
       var timeSent = DateTime.now();
       UserModel receiverUserData;
-      var userDataMap =
-          await firestore.collection('users').doc(receiverUserId).get();
+      var userDataMap = await firestore
+          .collection(firebaseUsersCollection)
+          .doc(receiverUserId)
+          .get();
       receiverUserData = UserModel.fromMap(userDataMap.data()!);
       var messageId = const Uuid().v1();
       _saveDataToContactsSubCollection(
@@ -278,8 +282,10 @@ class ChatRepository {
     try {
       var timeSent = DateTime.now();
       UserModel receiverUserData;
-      var userDataMap =
-          await firestore.collection('users').doc(receiverUserId).get();
+      var userDataMap = await firestore
+          .collection(firebaseUsersCollection)
+          .doc(receiverUserId)
+          .get();
       receiverUserData = UserModel.fromMap(userDataMap.data()!);
       var messageId = const Uuid().v1();
       _saveDataToContactsSubCollection(
@@ -312,27 +318,24 @@ class ChatRepository {
   }) async {
     try {
       await firestore
-          .collection('users')
+          .collection(firebaseUsersCollection)
           .doc(auth.currentUser!.uid)
-          .collection('chats ')
+          .collection(firebaseChatsCollection)
           .doc(receiverUserId)
-          .collection('messages')
+          .collection(firebaseMessagesCollection)
           .doc(messageId)
           .update({'isSeen': true});
 
       await firestore
-          .collection('users')
+          .collection(firebaseUsersCollection)
           .doc(receiverUserId)
-          .collection('chats ')
+          .collection(firebaseChatsCollection)
           .doc(auth.currentUser!.uid)
-          .collection('messages')
+          .collection(firebaseMessagesCollection)
           .doc(messageId)
           .update({'isSeen': true});
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:babble/common/repositories/common_firebase_repository.dart';
-import 'package:babble/core/misc.dart';
 import 'package:babble/core/strings.dart';
 import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:babble/models/user_model.dart';
@@ -9,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../common/functions/functions.dart';
 import '../../home/screens/home.dart';
 import '../screens/otpscreen.dart';
 import '../screens/user_information.dart';
@@ -95,10 +95,7 @@ class AuthRepository {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(loggedInSharedPrefsString, false);
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 
@@ -118,10 +115,7 @@ class AuthRepository {
           codeAutoRetrievalTimeout: (String verificationId) {},
           phoneNumber: phoneNumber);
     } on FirebaseException catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.message,
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 
@@ -135,9 +129,8 @@ class AuthRepository {
       await auth.signInWithCredential(credential);
       // userPhoneNumber = phoneNumber;
       Get.offAll(() => const UserInformationScreen());
-    } catch (ex) {
-      Get.showSnackbar(
-          GetSnackBar(duration: snackbarDuration, message: ex.toString()));
+    } catch (e) {
+      showCustomSnackBar(message: e.toString());
     }
   }
 
@@ -167,10 +160,7 @@ class AuthRepository {
           .set(user.toMap());
       Get.offAll(() => const Home());
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 
@@ -202,10 +192,7 @@ class AuthRepository {
           .doc(auth.currentUser!.uid)
           .update({'profilePic': photoUrl});
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 
@@ -226,10 +213,7 @@ class AuthRepository {
           .doc(auth.currentUser!.uid)
           .update({'name': name});
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 }

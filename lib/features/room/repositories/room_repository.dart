@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:babble/core/misc.dart';
 import 'package:babble/core/strings.dart';
 import 'package:babble/features/auth/controller/auth_controller.dart';
 import 'package:babble/models/room_model.dart';
@@ -8,8 +6,9 @@ import 'package:babble/common/repositories/common_firebase_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../common/functions/functions.dart';
 
 final roomRepositoryProvider = Provider(
   (ref) => RoomRepository(
@@ -61,7 +60,10 @@ class RoomRepository {
           speakingPhoneNumbers: [],
           membersUid: membersUids,
           isRoomClosed: false);
-      await firestore.collection('rooms').doc(roomId).set(room.toMap());
+      await firestore
+          .collection(firebaseRoomsCollection)
+          .doc(roomId)
+          .set(room.toMap());
       for (int i = 0; i < membersUids.length; i++) {
         var currentListOfRooms = await listRoomsOfUid(membersUids[i]);
         await firestore
@@ -72,8 +74,7 @@ class RoomRepository {
         });
       }
     } catch (e) {
-      Get.showSnackbar(
-          GetSnackBar(duration: snackbarDuration, message: e.toString()));
+      showCustomSnackBar(message: e.toString());
     }
   }
 
@@ -211,14 +212,13 @@ class RoomRepository {
             .update({'roomId': usersRoomList});
       }
     } catch (e) {
-      Get.showSnackbar(
-          GetSnackBar(duration: snackbarDuration, message: e.toString()));
+      showCustomSnackBar(message: e.toString());
     }
   }
 
   Stream<List<RoomModel>> getRooms() {
     return firestore
-        .collection('rooms')
+        .collection(firebaseRoomsCollection)
         .orderBy('name')
         .snapshots()
         .map((event) {
@@ -234,14 +234,15 @@ class RoomRepository {
   }
 
   Future<RoomModel> getDetailsOfRoom(String roomId) async {
-    var roomDataMap = await firestore.collection('rooms').doc(roomId).get();
+    var roomDataMap =
+        await firestore.collection(firebaseRoomsCollection).doc(roomId).get();
     var roomData = RoomModel.fromMap(roomDataMap.data()!);
     return roomData;
   }
 
   Stream<List<String>>? getSpeakersStreamOfRoom(String roomId) {
     return firestore
-        .collection('rooms')
+        .collection(firebaseRoomsCollection)
         .doc(roomId)
         .snapshots()
         .asyncMap((event) {

@@ -1,5 +1,4 @@
 import 'package:babble/core/colors.dart';
-import 'package:babble/core/misc.dart';
 import 'package:babble/common/widgets/custom_search_bar.dart';
 import 'package:babble/features/select_contacts/controller/contacts_controller.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/radii.dart';
 import '../../../../../core/strings.dart';
 import '../../../../../core/textstyles.dart';
+import '../../../common/functions/functions.dart';
 import '../../../common/widgets/error_screen.dart';
 import '../../../common/widgets/loader.dart';
 import '../../auth/controller/auth_controller.dart';
@@ -37,8 +37,7 @@ Future<void> _launchSMS(
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
-    Get.showSnackbar(const GetSnackBar(
-        message: "Can't open SMS app", duration: snackbarDuration));
+    showCustomSnackBar(message: "Can't open SMS app");
   }
 }
 

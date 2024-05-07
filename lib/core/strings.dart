@@ -1,3 +1,9 @@
+//app publishing details
+const appVersion = '1.0.0';
+const myEmail = 'apanandp41@gmail.com';
+const String myLinkedInUrl = 'https://www.linkedin.com/in/anand-p-87ab77248/';
+
+/////in-app
 const String appTitle = 'Babble',
     juaFont = 'Jua',
     blahBg = 'assets/images/blah-01.png',
@@ -13,6 +19,8 @@ const String hardcodedPrefilledInviteSMSText =
 const String firebaseSmsDocId = "prefilledSms";
 const String firebaseUsersCollection = 'users';
 const String firebaseRoomsCollection = 'rooms';
+const String firebaseChatsCollection = 'chats';
+const String firebaseMessagesCollection = 'messages';
 const String firebasePPTCCollection = 'privacyPolicyTermsAndConditions';
 const String firebasePPTCCollectionHTMLfield = 'html';
 const String profilePicViewerHeroTag = 'profilePhotoHeroTag';
@@ -20,7 +28,6 @@ const String firebasePrivacyPolicyDocument = 'privacyPolicy';
 const String firebaseTermsAndConditionsDocument = 'termsAndConditions';
 const String firebaseSms = 'smsData';
 const String loggedInSharedPrefsString = 'loggedIn';
-const String myLinkedInUrl = 'https://www.linkedin.com/in/anand-p-87ab77248/';
 /////////////////////////////////////////////////DescriptionOfBabble///////////////////////////////////////////////////////
 const formalDescriptionOfBabble = """Formal Description for Babble
 Babble is a mobile application fostering real-time communication through two engaging features:

@@ -35,14 +35,14 @@ class CustomHomeAppBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(messageBorderRadius)),
           padding: EdgeInsetsDirectional.zero,
           itemBuilder: (context) => [
-            PopupMenuItem(
+            const PopupMenuItem(
               padding: EdgeInsets.zero,
               value: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                       "Settings",
                       style: dropDownListButtonTS,

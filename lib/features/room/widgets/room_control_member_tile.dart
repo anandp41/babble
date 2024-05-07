@@ -221,13 +221,13 @@ class RoomControlMemberTile extends ConsumerWidget {
                                 await FlutterContacts.openExternalInsert(
                                     newContact);
                               },
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12.0),
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 12.0),
                                     child: Text(
                                       "Add to contacts",
                                       style: dropDownListButtonTS,

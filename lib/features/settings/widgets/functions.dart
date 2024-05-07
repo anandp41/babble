@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../common/functions/functions.dart';
 import '../../../core/colors.dart';
-import '../../../core/misc.dart';
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
 import '../../../models/user_model.dart';
@@ -18,7 +18,7 @@ babbleAboutDialog(BuildContext context) {
       context: context,
       applicationName: appTitle,
       barrierLabel: "App info",
-      applicationVersion: "1.0.0+1",
+      applicationVersion: appVersion,
       children: [
         const Text("Created by: Anand P",
             style: TextStyle(color: Colors.black)),
@@ -30,7 +30,7 @@ babbleAboutDialog(BuildContext context) {
             const TextSpan(
                 text: 'Email: ', style: TextStyle(color: Colors.black)),
             TextSpan(
-                text: "apanandp41@gmail.com",
+                text: myEmail,
                 style: linkStyle,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
@@ -145,10 +145,7 @@ Future<dynamic> showNameBottomSheet(
                       ref.refresh(userDataAuthProvider);
                     }
                     if (newNameController.text == '') {
-                      Get.showSnackbar(const GetSnackBar(
-                        duration: snackbarDuration,
-                        message: 'Enter valid name',
-                      ));
+                      showCustomSnackBar(message: 'Enter valid name');
                     }
                   },
                   child: const Text(

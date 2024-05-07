@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
 import 'package:get/get.dart';
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
 import '../../auth/controller/privacy_policy_terms_and_conditions_controller.dart';
+import '../../settings/widgets/pp_and_tc_viewer_holder_scaffold.dart';
 
 class PrivacyPolicyTermsConditionsText extends ConsumerWidget {
   const PrivacyPolicyTermsConditionsText({
@@ -35,12 +35,9 @@ class PrivacyPolicyTermsConditionsText extends ConsumerWidget {
                       style: linkStyle,
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.to(() => HtmlContentViewer(
-                                htmlContent:
-                                    data![firebasePrivacyPolicyDocument]!,
-                                initialContentHeight: screenSize.height,
-                                initialContentWidth: screenSize.width,
-                              ));
+                          Get.to(() =>
+                              PrivacyPolicyTermsConditionsViewerHolderScaffold(
+                                  data: data![firebasePrivacyPolicyDocument]!));
                         }),
                   const TextSpan(text: '. Tap "Get Started" to accept the '),
                   TextSpan(
@@ -48,12 +45,10 @@ class PrivacyPolicyTermsConditionsText extends ConsumerWidget {
                       style: linkStyle,
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.to(() => HtmlContentViewer(
-                                htmlContent:
-                                    data![firebaseTermsAndConditionsDocument]!,
-                                initialContentHeight: screenSize.height,
-                                initialContentWidth: screenSize.width,
-                              ));
+                          Get.to(() =>
+                              PrivacyPolicyTermsConditionsViewerHolderScaffold(
+                                  data: data![
+                                      firebaseTermsAndConditionsDocument]!));
                         }),
                   const TextSpan(text: '.'),
                 ],

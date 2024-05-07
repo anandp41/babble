@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/strings.dart';
 import '../../../models/user_model.dart';
 
 final contactsRepositoryProvider = Provider(
@@ -22,9 +23,6 @@ class ContactsRepository {
     } catch (e) {
       debugPrint(e.toString());
     }
-
-    // var result = await checkIfOnBabble(contacts);
-    // return result;
     return contacts;
   }
 
@@ -58,7 +56,8 @@ class ContactsRepository {
     List<Contact> contacts = await getContacts();
     List<Map<String, String>> resultContacts = [];
 
-    var userCollection = await firestore.collection('users').get();
+    var userCollection =
+        await firestore.collection(firebaseUsersCollection).get();
 
     for (var contact in contacts) {
       if (contact.phones.isEmpty) {
@@ -101,42 +100,4 @@ class ContactsRepository {
     }
     return resultContacts;
   }
-
-  // void selectContact(Contact selectedContact) async {
-  //   try {
-  //     var userCollection = await firestore.collection('users').get();
-  //     bool isFound = false;
-
-  //     List<String> selectedPhoneNums = [];
-
-  //     for (var number in selectedContact.phones) {
-  //       selectedPhoneNums.add(number.number.replaceAll(' ', ''));
-  //     }
-  //     for (int i = 0; i < selectedPhoneNums.length; i++) {
-  //       for (var document in userCollection.docs) {
-  //         var userData = UserModel.fromMap(document.data());
-
-  //         if (selectedPhoneNums[i] == userData.phoneNumber) {
-  //           isFound = true;
-
-  //           Get.to(() => ChatScreen(
-  //               name: selectedContact.displayName,
-  //               phoneNumber: selectedContact.phones,
-  //               uid: userData.uid,
-  //               profilePic: userData.profilePic));
-  //         }
-  //       }
-  //     }
-
-  //     if (!isFound) {
-  //       Get.showSnackbar(const GetSnackBar(
-  //         duration: snackbarDuration,
-  //         message: "This number does not exist on Babble",
-  //       ));
-  //     }
-  //   } catch (e) {
-  //     Get.showSnackbar(
-  //         GetSnackBar(duration: snackbarDuration, message: e.toString()));
-  //   }
-  // }
 }

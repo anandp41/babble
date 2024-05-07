@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:enough_giphy_flutter/enough_giphy_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../core/misc.dart';
+import '../functions/functions.dart';
 
 class Utils {
   static Future<File?> pickImageFromGallery() async {
@@ -18,10 +17,7 @@ class Utils {
         image = File(pickedImage.path);
       }
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
     return image;
   }
@@ -31,10 +27,7 @@ class Utils {
     try {
       media = await ImagePicker().pickMultipleMedia(requestFullMetadata: true);
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
     return media;
   }
@@ -47,10 +40,7 @@ class Utils {
         files = result.files;
       }
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
 
     return files;
@@ -65,10 +55,7 @@ class Utils {
         video = File(pickedVideo.path);
       }
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
     return video;
   }
@@ -82,10 +69,7 @@ class Utils {
           apiKey: 'ESM5K0V8BaiP6AwVov0SuSTRuhgoaGO5',
           showAttribution: false);
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
     return gif;
   }

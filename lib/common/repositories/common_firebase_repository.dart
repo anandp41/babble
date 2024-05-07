@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 
-import '../../core/misc.dart';
+import '../functions/functions.dart';
 
 final commonFirebaseStorageRepositoryProvider = Provider((ref) =>
     CommonFirebaseStorageRepository(firebaseStorage: FirebaseStorage.instance));
@@ -24,10 +23,7 @@ class CommonFirebaseStorageRepository {
     try {
       await firebaseStorage.ref().child(serverFilePath).delete();
     } catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        duration: snackbarDuration,
-        message: e.toString(),
-      ));
+      showCustomSnackBar(message: e.toString());
     }
   }
 }
