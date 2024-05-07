@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../config/giphy_key.dart';
 import '../functions/functions.dart';
 
 class Utils {
@@ -65,9 +66,7 @@ class Utils {
     GiphyGif? gif;
     try {
       gif = await Giphy.getGif(
-          context: context,
-          apiKey: 'ESM5K0V8BaiP6AwVov0SuSTRuhgoaGO5',
-          showAttribution: false);
+          context: context, apiKey: giphyAPIKey, showAttribution: false);
     } catch (e) {
       showCustomSnackBar(message: e.toString());
     }
