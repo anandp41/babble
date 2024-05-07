@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../core/colors.dart';
 import '../../../core/strings.dart';
+import '../../../core/textstyles.dart';
 import '../../auth/controller/privacy_policy_terms_and_conditions_controller.dart';
 
 class PrivacyPolicyButton extends StatelessWidget {
@@ -35,8 +36,7 @@ class PrivacyPolicyButton extends StatelessWidget {
         ),
         title: Text(
           "Privacy Policy",
-          style:
-              TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Hind'),
+          style: settingsButtonsTitleTS,
         ),
       ),
     );

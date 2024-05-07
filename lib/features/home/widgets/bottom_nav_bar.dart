@@ -17,11 +17,7 @@ class CustomNavBar extends ConsumerWidget {
           color: bottomNavBarColor,
           borderRadius: BorderRadius.circular(15),
           boxShadow: const [
-            BoxShadow(
-                //offset: Offset(0, 0),
-                color: Colors.black38,
-                blurRadius: 3,
-                spreadRadius: 1)
+            BoxShadow(color: Colors.black38, blurRadius: 3, spreadRadius: 1)
           ]),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

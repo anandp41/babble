@@ -3,6 +3,7 @@ import 'package:babble/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import '../../../core/textstyles.dart';
 import 'select_contacts_room.dart';
 
 class AddMemberToRoomScreen extends ConsumerStatefulWidget {
@@ -62,10 +63,7 @@ class _AddMemberToRoomScreenState extends ConsumerState<AddMemberToRoomScreen> {
                 padding: const EdgeInsets.all(10),
                 child: const Text(
                   "Select contacts",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Hind',
-                      fontWeight: FontWeight.w600),
+                  style: selectContactsTitleTS,
                 ),
               ),
               Expanded(

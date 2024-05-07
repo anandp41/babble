@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/colors.dart';
 import '../../../../../core/misc.dart';
+import '../../../core/textstyles.dart';
 import 'display_file.dart';
 
 class MessageReplyPreview extends ConsumerWidget {
@@ -44,11 +45,7 @@ class MessageReplyPreview extends ConsumerWidget {
                     Expanded(
                       child: Text(
                         name,
-                        style: const TextStyle(
-                          color: senderMessageNameColor,
-                          overflow: TextOverflow.ellipsis,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: messageReplyPreviewNameTS,
                       ),
                     ),
                     IconButton(

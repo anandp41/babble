@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import '../../../common/utils/utils.dart';
+import '../../../core/textstyles.dart';
 import 'select_contacts_room.dart';
 
 class MakeRoomScreen extends ConsumerStatefulWidget {
@@ -115,10 +116,7 @@ class _MakeRoomScreenState extends ConsumerState<MakeRoomScreen> {
                 padding: const EdgeInsets.all(10),
                 child: const Text(
                   "Select contacts",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Hind',
-                      fontWeight: FontWeight.w600),
+                  style: selectContactsTitleTS,
                 ),
               ),
               const Expanded(child: SelectContactsRoom()),

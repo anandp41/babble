@@ -6,9 +6,9 @@ const chatScreenDateBg = Color.fromARGB(255, 87, 88, 89);
 //InApp
 const bodyBackgroundColor =
 //Color(0xFFE0D6D6)
-        Color.fromARGB(255, 105, 104, 101),
+        Color.fromARGB(255, 127, 127, 126),
     bottomNavBarColor = Color(0xFF1F384F),
-    roomTileSpeakingMicIcon = Color.fromARGB(255, 5, 155, 10),
+    roomTileSpeakingMicIcon = Color.fromARGB(255, 14, 172, 19),
     otpSubColor = Color(0xFF838BA1),
     regTitleColor = Color.fromRGBO(30, 35, 44, 1),
     kWhite = Colors.white,
@@ -18,17 +18,18 @@ const bodyBackgroundColor =
     buttonBorder = Color.fromARGB(255, 30, 35, 44),
     babbleTitleColor = Color.fromRGBO(7, 24, 85, 1),
     searchBoxBg = Color.fromARGB(255, 118, 117, 117),
-    searchBoxTextColor = Color.fromARGB(255, 162, 159, 159),
+    searchBoxTextColor = Color.fromARGB(255, 207, 204, 204),
     chatListLastMsgTime = Colors.black,
     roomMemberNameTextColor = Color.fromARGB(255, 92, 89, 89),
     chatListTileLastMsgTextColor = Color.fromARGB(255, 237, 234, 234),
-    roomsListTileSpeakingTitleTextColor = Color.fromARGB(255, 237, 234, 234),
+    roomsListTileSpeakingTitleTextColor = Color.fromARGB(255, 255, 249, 249),
     roomMuteRedGradientColorsList = [Color(0xFFE81F1F), Color(0xFF730808)],
     roomMuteGreenGradientColorsList = [Color(0xFF53E81F), Color(0xFF107308)],
     roomBackgroundGradientColorsList = [
       Color(0xFFE8DCDC),
       Color(0xFFA29F9F),
     ],
+    appBarOnlineDotCircleColor = Color.fromARGB(255, 11, 223, 18),
     roomBgGradientList = [Color(0xFFA29F9F), Color(0xFFE8DCDC)],
     roomControlCloseRoomButtonRedColor = Color(0xFFC62222),
     roomControlCloseRoomButtonGreenColor = Colors.green,

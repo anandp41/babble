@@ -31,7 +31,7 @@ class RoomControlsRoomImage extends StatelessWidget {
               future: Future(() => NetworkImage(newRoomData!.roomPic)),
               builder: (context, snapshot) => CircleAvatar(
                 backgroundImage: snapshot.data! as ImageProvider<Object>,
-                radius: 3 * chatListImageRadii,
+                radius: 2 * chatListImageRadii,
               ),
             )
           : const CircleAvatar(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
 import 'package:get/get.dart';
-
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
 import '../../auth/controller/privacy_policy_terms_and_conditions_controller.dart';

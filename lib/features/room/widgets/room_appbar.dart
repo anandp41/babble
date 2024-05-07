@@ -44,6 +44,7 @@ class RoomAppBar extends ConsumerWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             roomData.roomPic != ''

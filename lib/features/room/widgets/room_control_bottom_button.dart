@@ -38,11 +38,7 @@ class RoomControlBottomButton extends ConsumerWidget {
         child: Center(
           child: Text(
             isHost ? "Delete Room" : "Leave Room",
-            style: const TextStyle(
-                fontFamily: 'Hind',
-                fontWeight: FontWeight.w400,
-                fontSize: 24,
-                color: Colors.white),
+            style: roomControlBottomButtonTextTS,
           ),
         ),
       ),

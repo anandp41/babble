@@ -1,6 +1,6 @@
 import 'package:babble/core/strings.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:math' as math;
 import 'colors.dart';
 import 'misc.dart';
 
@@ -10,13 +10,28 @@ const appTitleTextStyle = TextStyle(
     fontSize: 45,
     fontWeight: FontWeight.bold,
     fontFamily: juaFont);
+
+var roomSpeakingMemberInNameTS = TextStyle(
+    overflow: TextOverflow.fade,
+    backgroundColor: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+        .withOpacity(1.0));
+
 //ChatList
-const chatListTileNameTextStyle = TextStyle(
+const getStartedTS =
+        TextStyle(color: titleColor, fontSize: 18, fontWeight: FontWeight.w600),
+    chatListTileNameTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
         fontWeight: FontWeight.w600,
         color: titleColor,
         fontSize: 16),
+    selectContactsTitleTS = TextStyle(
+        fontSize: 18, fontFamily: 'Hind', fontWeight: FontWeight.w600),
+    roomControlBottomButtonTextTS = TextStyle(
+        fontFamily: 'Hind',
+        fontWeight: FontWeight.w400,
+        fontSize: 24,
+        color: Colors.white),
     roomListTileNameTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
@@ -46,6 +61,11 @@ const chatListTileNameTextStyle = TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 14,
         color: roomsListTileSpeakingTitleTextColor),
+    messageReplyPreviewNameTS = TextStyle(
+      color: senderMessageNameColor,
+      overflow: TextOverflow.ellipsis,
+      fontWeight: FontWeight.bold,
+    ),
     roomAppBarLeaveTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
         fontFamily: 'Hind',
@@ -150,6 +170,26 @@ const chatListTileNameTextStyle = TextStyle(
         TextStyle(color: Colors.red, fontSize: 14, fontFamily: 'Hind');
 TextStyle linkStyle = const TextStyle(color: Color.fromARGB(255, 20, 109, 182));
 TextStyle defaultStyle = const TextStyle(
-  color: Colors.white,
-  fontSize: 16.0,
-);
+      color: Colors.white,
+      fontSize: 16.0,
+    ),
+    dropDownListButtonTS = const TextStyle(
+        fontFamily: 'Hind',
+        fontSize: 16,
+        color: babbleTitleColor,
+        fontWeight: FontWeight.w500);
+
+//Settings
+const settingsAppBarTitleTS = TextStyle(
+        color: Colors.white,
+        fontFamily: 'Hind',
+        fontWeight: FontWeight.w600,
+        fontSize: 24),
+    settingsButtonsTitleTS =
+        TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Hind'),
+    settingsNamePreviewTS = TextStyle(
+        overflow: TextOverflow.ellipsis,
+        fontFamily: 'Hind',
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        color: babbleTitleColor);

@@ -64,7 +64,7 @@ class ChatAppBar extends ConsumerWidget {
                             right: 0,
                             child: CircleAvatar(
                               radius: 6,
-                              backgroundColor: Color.fromARGB(255, 11, 223, 18),
+                              backgroundColor: appBarOnlineDotCircleColor,
                             ))
                         : const SizedBox();
                   })

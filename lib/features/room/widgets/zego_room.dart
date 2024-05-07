@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:zego_uikit_prebuilt_live_audio_room/zego_uikit_prebuilt_live_audio_room.dart';
@@ -12,6 +12,7 @@ import '../../../core/colors.dart';
 import '../../chat/controller/chat_controller.dart';
 import '../../select_contacts/repository/contacts_repository.dart';
 import '../controller/room_controller.dart';
+import 'room_occupant_name_tile.dart';
 
 class LiveAudioRoomPage extends ConsumerWidget {
   final bool isHost;
@@ -94,14 +95,7 @@ class LiveAudioRoomPage extends ConsumerWidget {
                                         child: Text(
                                           snapshot.data!.split(' ').first,
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              overflow: TextOverflow.fade,
-                                              backgroundColor: Color((math
-                                                                  .Random()
-                                                              .nextDouble() *
-                                                          0xFFFFFF)
-                                                      .toInt())
-                                                  .withOpacity(1.0)),
+                                          style: roomSpeakingMemberInNameTS,
                                         ));
                                   } else {
                                     return const SizedBox.shrink();
@@ -155,40 +149,5 @@ class LiveAudioRoomPage extends ConsumerWidget {
                 ),
               controller: ZegoLiveAudioRoomController()..openSeats());
         });
-  }
-}
-
-class RoomOccupantNameTile extends ConsumerWidget {
-  final ZegoUIKitUser user;
-  const RoomOccupantNameTile({
-    super.key,
-    required this.user,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return FutureBuilder(
-      future: ref
-          .read(contactsRepositoryProvider)
-          .ifSavedContactName(phoneNumberFromServerToCheck: user.name),
-      initialData: user.name,
-      builder: (context, snapshot) {
-        return Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              user.name == snapshot.data!
-                  ? snapshot.data!
-                  : "${snapshot.data!}-${user.name}",
-              softWrap: true,
-              maxLines: 1,
-              textWidthBasis: TextWidthBasis.parent,
-              overflow: TextOverflow.ellipsis,
-              style: roomListTileNameTextStyle,
-            ),
-          ),
-        );
-      },
-    );
   }
 }

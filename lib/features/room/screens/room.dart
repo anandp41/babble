@@ -26,7 +26,7 @@ class Room extends ConsumerWidget {
         extendBody: true,
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(80),
+            preferredSize: const Size.fromHeight(70),
             child: RoomAppBar(
                 roomData: roomData,
                 memberId: userData!.uid,

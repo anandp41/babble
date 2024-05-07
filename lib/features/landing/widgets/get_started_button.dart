@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../core/colors.dart';
 import '../../../core/misc.dart';
 import '../../../core/strings.dart';
+import '../../../core/textstyles.dart';
 import '../../auth/screens/registration.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -36,8 +35,7 @@ class GetStartedButton extends StatelessWidget {
           child: const Center(
             child: Text(
               getStarted,
-              style: TextStyle(
-                  color: titleColor, fontSize: 18, fontWeight: FontWeight.w600),
+              style: getStartedTS,
             ),
           ),
         ),

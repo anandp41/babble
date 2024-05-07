@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/colors.dart';
+import '../../../core/textstyles.dart';
 import 'functions.dart';
 
 class AboutBabbleButton extends StatelessWidget {
@@ -23,8 +24,7 @@ class AboutBabbleButton extends StatelessWidget {
         ),
         title: Text(
           "App info",
-          style:
-              TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Hind'),
+          style: settingsButtonsTitleTS,
         ),
       ),
     );

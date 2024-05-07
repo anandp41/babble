@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/textstyles.dart';
 import 'functions.dart';
 
 class DeleteAccountButton extends StatelessWidget {
@@ -24,8 +25,7 @@ class DeleteAccountButton extends StatelessWidget {
         ),
         title: Text(
           "Delete account permanently",
-          style:
-              TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Hind'),
+          style: settingsButtonsTitleTS,
         ),
       ),
     );

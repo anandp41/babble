@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/colors.dart';
 import '../../../common/widgets/babble_title.dart';
+import '../../../core/textstyles.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({
@@ -17,7 +18,6 @@ class CustomHomeAppBar extends StatelessWidget {
       elevation: 0,
       toolbarHeight: 70,
       backgroundColor: bodyBackgroundColor,
-      //automaticallyImplyLeading: false,
       centerTitle: true,
       title: const SafeArea(child: BabbleTitleWidget()),
       actions: [
@@ -35,21 +35,17 @@ class CustomHomeAppBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(messageBorderRadius)),
           padding: EdgeInsetsDirectional.zero,
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               padding: EdgeInsets.zero,
               value: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                       "Settings",
-                      style: TextStyle(
-                          fontFamily: 'Hind',
-                          fontSize: 14,
-                          color: babbleTitleColor,
-                          fontWeight: FontWeight.w500),
+                      style: dropDownListButtonTS,
                     ),
                   ),
                 ],

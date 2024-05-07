@@ -59,7 +59,6 @@ class _HomeState extends ConsumerState<Home> with WidgetsBindingObserver {
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: false,
       extendBody: false,
-      // backgroundColor: bodyBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(70),
         child: CustomHomeAppBar(),

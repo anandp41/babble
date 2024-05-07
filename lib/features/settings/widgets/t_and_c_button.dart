@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../core/colors.dart';
 import '../../../core/strings.dart';
+import '../../../core/textstyles.dart';
 import '../../auth/controller/privacy_policy_terms_and_conditions_controller.dart';
 
 class TandCButton extends StatelessWidget {
@@ -35,8 +36,7 @@ class TandCButton extends StatelessWidget {
         ),
         title: Text(
           "Terms and Conditions",
-          style:
-              TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Hind'),
+          style: settingsAppBarTitleTS,
         ),
       ),
     );

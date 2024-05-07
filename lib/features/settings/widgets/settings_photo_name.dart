@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/colors.dart';
+import '../../../core/textstyles.dart';
 import '../../../models/user_model.dart';
 import 'functions.dart';
 
@@ -28,12 +29,7 @@ class SettingsNamePanel extends StatelessWidget {
               Expanded(
                 child: Text(
                   userData.name,
-                  style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      fontFamily: 'Hind',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      color: babbleTitleColor),
+                  style: settingsNamePreviewTS,
                 ),
               ),
               IconButton(

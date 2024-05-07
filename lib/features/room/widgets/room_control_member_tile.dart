@@ -66,7 +66,6 @@ class RoomControlMemberTile extends ConsumerWidget {
                                   softWrap: true,
                                   maxLines: 1,
                                   textWidthBasis: TextWidthBasis.parent,
-                                  overflow: TextOverflow.ellipsis,
                                   style: chatListTileNameTextStyle,
                                 )
                               : FutureBuilder(
@@ -89,7 +88,6 @@ class RoomControlMemberTile extends ConsumerWidget {
                                         softWrap: true,
                                         maxLines: 1,
                                         textWidthBasis: TextWidthBasis.parent,
-                                        overflow: TextOverflow.ellipsis,
                                         style: chatListTileNameTextStyle,
                                       ),
                                     );
@@ -171,27 +169,51 @@ class RoomControlMemberTile extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (currentUserData.uid == roomData.hostUid)
-                          TextButton(
-                              onPressed: () async {
+                          InkWell(
+                              onTap: () async {
                                 await ref
                                     .read(roomControllerProvider)
                                     .makeMemberAsHost(
                                         roomId: roomData.roomId,
                                         memberId: userData.uid);
                               },
-                              child: Text(
-                                  "Make ${nameFound ? name : userData.phoneNumber} the host")),
-                        TextButton(
-                            onPressed: () => Get.to(() => ChatScreen(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0),
+                                    child: Text(
+                                      "Make ${nameFound ? name : userData.phoneNumber} the host",
+                                      style: dropDownListButtonTS,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        InkWell(
+                            onTap: () => Get.to(() => ChatScreen(
                                 name: nameFound ? name : userData.phoneNumber,
                                 phoneNumber: userData.phoneNumber,
                                 uid: userData.uid,
                                 profilePic: userData.profilePic)),
-                            child: Text(
-                                "Message ${nameFound ? name : userData.phoneNumber}")),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12.0),
+                                  child: Text(
+                                    "Message ${nameFound ? name : userData.phoneNumber}",
+                                    style: dropDownListButtonTS,
+                                  ),
+                                ),
+                              ],
+                            )),
                         if (!nameFound)
-                          TextButton(
-                              onPressed: () async {
+                          InkWell(
+                              onTap: () async {
                                 final newContact = Contact()
                                   ..name.first = userData.name
                                   ..name.last = ''
@@ -199,7 +221,20 @@ class RoomControlMemberTile extends ConsumerWidget {
                                 await FlutterContacts.openExternalInsert(
                                     newContact);
                               },
-                              child: const Text("Add to contacts"))
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0),
+                                    child: Text(
+                                      "Add to contacts",
+                                      style: dropDownListButtonTS,
+                                    ),
+                                  ),
+                                ],
+                              ))
                       ],
                     ),
                   ),

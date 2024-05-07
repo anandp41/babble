@@ -34,47 +34,45 @@ class _RoomsListScreenState extends ConsumerState<RoomsListScreen> {
           height: 20,
         ),
         Expanded(
-          child: RefreshIndicator(
-              child: ref.watch(userDataAuthProvider).when(
-                  data: (userData) => userData!.roomId.isEmpty
-                      ? const ErrorScreen(error: "You are'nt in any room")
-                      : ListView.builder(
-                          itemCount: userData.roomId.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return FutureBuilder(
-                              future: ref
-                                  .watch(roomControllerProvider)
-                                  .getDetailsOfRoom(userData.roomId[index]),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  var roomData = snapshot.data;
-                                  if (roomData!.name
-                                      .toUpperCase()
-                                      .contains(name.trim().toUpperCase())) {
-                                    return RoomsListTile(
-                                      roomData: roomData,
-                                      userData: userData,
-                                    );
-                                  } else {
-                                    return const SizedBox.shrink();
-                                  }
-                                } else {
-                                  return const SizedBox.shrink();
-                                }
-                              },
-                            );
+          child: ref.watch(userDataAuthProvider).when(
+              data: (userData) => userData!.roomId.isEmpty
+                  ? const ErrorScreen(error: "You are'nt in any room")
+                  : ListView.builder(
+                      itemCount: userData.roomId.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return FutureBuilder(
+                          future: ref
+                              .watch(roomControllerProvider)
+                              .getDetailsOfRoom(userData.roomId[index]),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              var roomData = snapshot.data;
+                              if (roomData!.name
+                                  .toUpperCase()
+                                  .contains(name.trim().toUpperCase())) {
+                                return RoomsListTile(
+                                  roomData: roomData,
+                                  userData: userData,
+                                );
+                              } else {
+                                return const SizedBox.shrink();
+                              }
+                            } else {
+                              return const SizedBox.shrink();
+                            }
                           },
-                        ),
-                  error: (error, stackTrace) => const ErrorScreen(
-                        error: "Error fetching user data",
-                      ),
-                  loading: () => const CircularProgressIndicator(
-                        color: babbleTitleColor,
-                      )),
-              onRefresh: () async => ref.refresh(userDataAuthProvider)),
+                        );
+                      },
+                    ),
+              error: (error, stackTrace) => const ErrorScreen(
+                    error: "Error fetching user data",
+                  ),
+              loading: () => const CircularProgressIndicator(
+                    color: babbleTitleColor,
+                  )),
         ),
         const SizedBox(
           height: 3 * chatListImageRadii,

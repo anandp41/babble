@@ -40,7 +40,7 @@ class RoomListTileSpeakersNameSubField extends ConsumerWidget {
                     children: [
                       const Icon(
                         Icons.mic,
-                        size: 20,
+                        size: 24,
                         color: roomTileSpeakingMicIcon,
                       ),
                       FutureBuilder(
