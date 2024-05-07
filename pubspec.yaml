@@ -28,6 +28,7 @@ dependencies:
   flutter_switch: ^0.3.2
   get: ^4.6.6
   image_picker: ^1.0.7
+  in_app_update: ^4.2.2
   intl: ^0.18.1
   loading_animation_widget: ^1.2.0+4
   meta: ^1.11.0
