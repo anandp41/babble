@@ -6,7 +6,7 @@ const chatScreenDateBg = Color.fromARGB(255, 87, 88, 89);
 //InApp
 const bodyBackgroundColor =
 //Color(0xFFE0D6D6)
-        Color.fromARGB(255, 127, 127, 126),
+        Color(0xFF7F7F7E),
     bottomNavBarColor = Color(0xFF1F384F),
     roomTileSpeakingMicIcon = Color.fromARGB(255, 14, 172, 19),
     otpSubColor = Color(0xFF838BA1),
@@ -16,7 +16,7 @@ const bodyBackgroundColor =
     getStartedBg = Color.fromARGB(255, 121, 124, 123),
     titleColor = Color.fromRGBO(7, 24, 85, 1),
     buttonBorder = Color.fromARGB(255, 30, 35, 44),
-    babbleTitleColor = Color.fromRGBO(7, 24, 85, 1),
+    babbleTitleColor = Color(0xFF071855),
     searchBoxBg = Color.fromARGB(255, 118, 117, 117),
     searchBoxTextColor = Color.fromARGB(255, 207, 204, 204),
     chatListLastMsgTime = Colors.black,
