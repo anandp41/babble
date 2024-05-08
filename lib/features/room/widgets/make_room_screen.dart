@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:babble/features/auth/controller/auth_controller.dart';
 import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:babble/core/colors.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,8 @@ class _MakeRoomScreenState extends ConsumerState<MakeRoomScreen> {
           ref.read(selectedRoomContacts));
       Get.back();
       ref.read(selectedRoomContacts.state).update((state) => []);
+      ref.refresh(userDataAuthProvider);
+      ref.refresh(roomControllerProvider);
     }
   }
 

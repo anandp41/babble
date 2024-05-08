@@ -101,6 +101,15 @@ class LiveAudioRoomPage extends ConsumerWidget {
                                     return const SizedBox.shrink();
                                   }
                                 },
+                              )
+                            else
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Text(
+                                  "You",
+                                  textAlign: TextAlign.center,
+                                  style: roomSpeakingMemberInNameTS,
+                                ),
                               ),
                           ],
                         ),

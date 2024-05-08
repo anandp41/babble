@@ -33,7 +33,7 @@ class TandCButton extends StatelessWidget {
         ),
         title: Text(
           "Terms and Conditions",
-          style: settingsAppBarTitleTS,
+          style: settingsButtonsTitleTS,
         ),
       ),
     );

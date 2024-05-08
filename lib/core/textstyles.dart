@@ -53,6 +53,7 @@ const chatListTileNameTextStyle = TextStyle(
     chatListTileLastMsgTimeTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w500,
+        overflow: TextOverflow.ellipsis,
         fontSize: 14,
         color: chatListLastMsgTime),
     messageReplyPreviewNameTS = TextStyle(
@@ -65,28 +66,33 @@ const chatListTileNameTextStyle = TextStyle(
       fontFamily: 'Hind',
       fontWeight: FontWeight.w400,
       color: myMessageCardTimeColor,
+      overflow: TextOverflow.ellipsis,
     ),
     senderCardTimeTextStyle = TextStyle(
       fontSize: 12,
       fontFamily: 'Hind',
       fontWeight: FontWeight.w400,
       color: senderMessageCardTimeColor,
+      overflow: TextOverflow.ellipsis,
     ),
     senderMessageCardTextStyle = TextStyle(
       fontFamily: 'Hind',
       fontWeight: FontWeight.w400,
       color: Colors.black,
+      overflow: TextOverflow.ellipsis,
       fontSize: 16,
     ),
     myMessageCardTextStyle = TextStyle(
       color: Colors.white,
       fontFamily: 'Hind',
       fontWeight: FontWeight.w400,
+      overflow: TextOverflow.ellipsis,
       fontSize: 16,
     ),
     chatDateTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w400,
+        overflow: TextOverflow.ellipsis,
         color: Colors.white70,
         fontSize: 12),
     chatAppBarTextStyle = TextStyle(
@@ -98,25 +104,35 @@ const chatListTileNameTextStyle = TextStyle(
 ///////////////////////Contact
 
 const selectContactsTitleTS = TextStyle(
-        fontSize: 18, fontFamily: 'Hind', fontWeight: FontWeight.w600),
+      fontSize: 18,
+      fontFamily: 'Hind',
+      fontWeight: FontWeight.w600,
+      overflow: TextOverflow.ellipsis,
+    ),
     contactTileInviteTextStyle = TextStyle(
       fontSize: 16,
       fontFamily: 'Hind',
       fontWeight: FontWeight.w600,
       color: babbleTitleColor,
+      overflow: TextOverflow.ellipsis,
     );
 
 ////////////////Links
-TextStyle linkStyle = const TextStyle(color: Color.fromARGB(255, 20, 109, 182));
+TextStyle linkStyle = const TextStyle(
+  color: Color.fromARGB(255, 20, 109, 182),
+  overflow: TextOverflow.ellipsis,
+);
 TextStyle defaultStyle = const TextStyle(
   color: Colors.white,
   fontSize: 16.0,
+  overflow: TextOverflow.ellipsis,
 );
 ///////////////FLoating Action Button
 const floatingActionRoomAddButtonTextStyle = TextStyle(
     color: Colors.white,
     fontFamily: 'Hind',
     fontWeight: FontWeight.w500,
+    overflow: TextOverflow.ellipsis,
     fontSize: 16);
 
 /////////////////////Dropdown
@@ -125,6 +141,7 @@ const dropDownListButtonTS = TextStyle(
     fontFamily: 'Hind',
     fontSize: 16,
     color: babbleTitleColor,
+    overflow: TextOverflow.ellipsis,
     fontWeight: FontWeight.w500);
 
 ///////////////////////////Rooms
@@ -156,11 +173,13 @@ const roomAppBarLeaveTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w600,
         color: babbleTitleColor,
+        overflow: TextOverflow.ellipsis,
         fontSize: 24),
     roomControlMembersTitleTextStyle = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w400,
         color: Colors.white,
+        overflow: TextOverflow.ellipsis,
         fontSize: 20),
     roomsListTileNameTextStyle = TextStyle(
         overflow: TextOverflow.ellipsis,
@@ -177,6 +196,7 @@ const roomAppBarLeaveTextStyle = TextStyle(
     roomControlBottomButtonTextTS = TextStyle(
         fontFamily: 'Hind',
         fontWeight: FontWeight.w400,
+        overflow: TextOverflow.ellipsis,
         fontSize: 24,
         color: Colors.white),
     roomListTileNameTextStyle = TextStyle(
@@ -191,6 +211,7 @@ const settingsAppBarTitleTS = TextStyle(
         color: Colors.white,
         fontFamily: 'Hind',
         fontWeight: FontWeight.w600,
+        overflow: TextOverflow.ellipsis,
         fontSize: 24),
     settingsButtonsTitleTS =
         TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Hind'),
@@ -200,9 +221,21 @@ const settingsAppBarTitleTS = TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w500,
         color: babbleTitleColor),
-    settingsNameSheetTextStyle =
-        TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'Hind'),
-    settingsButtonTS =
-        TextStyle(color: babbleTitleColor, fontSize: 14, fontFamily: 'Hind'),
-    settingsRedButtonTS =
-        TextStyle(color: Colors.red, fontSize: 14, fontFamily: 'Hind');
+    settingsNameSheetTextStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 14,
+      fontFamily: 'Hind',
+      overflow: TextOverflow.ellipsis,
+    ),
+    settingsButtonTS = TextStyle(
+      color: babbleTitleColor,
+      fontSize: 14,
+      fontFamily: 'Hind',
+      overflow: TextOverflow.ellipsis,
+    ),
+    settingsRedButtonTS = TextStyle(
+      color: Colors.red,
+      fontSize: 14,
+      fontFamily: 'Hind',
+      overflow: TextOverflow.ellipsis,
+    );

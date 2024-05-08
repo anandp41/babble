@@ -1,3 +1,4 @@
+import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,6 @@ import '../../../common/functions/functions.dart';
 import '../../../core/colors.dart';
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
-import '../../../models/user_model.dart';
 import '../../auth/controller/auth_controller.dart';
 import '../../auth/screens/registration.dart';
 
@@ -95,8 +95,9 @@ deleteAccountDialog(BuildContext context, WidgetRef ref) {
 }
 
 Future<dynamic> showNameBottomSheet(
-    BuildContext context, UserModel userData, WidgetRef ref) {
-  var newNameController = TextEditingController(text: userData.name);
+    BuildContext context, String name, WidgetRef ref,
+    {bool isRoom = false, String? roomId}) {
+  var newNameController = TextEditingController(text: name);
   return showModalBottomSheet(
     isScrollControlled: true,
     backgroundColor: settingsNameSheetBg,
@@ -112,8 +113,8 @@ Future<dynamic> showNameBottomSheet(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Enter your name",
+            Text(
+              isRoom ? "Enter room name" : "Enter your name",
               style: settingsNameSheetTextStyle,
             ),
             TextField(
@@ -137,12 +138,19 @@ Future<dynamic> showNameBottomSheet(
                 ),
                 TextButton(
                   onPressed: () async {
-                    if (newNameController.text != userData.name &&
+                    if (newNameController.text != name &&
                         newNameController.text != '') {
-                      await ref.read(authControllerProvider).updateUserName(
-                          name: newNameController.text.trim(), ref: ref);
-                      Get.back();
-                      ref.refresh(userDataAuthProvider);
+                      if (isRoom) {
+                        await ref.read(roomControllerProvider).updateRoomName(
+                            ref: ref, name: name, roomId: roomId!);
+                        Get.back();
+                        ref.refresh(roomControllerProvider);
+                      } else {
+                        await ref.read(authControllerProvider).updateUserName(
+                            name: newNameController.text.trim(), ref: ref);
+                        Get.back();
+                        ref.refresh(userDataAuthProvider);
+                      }
                     }
                     if (newNameController.text == '') {
                       showCustomSnackBar(message: 'Enter valid name');

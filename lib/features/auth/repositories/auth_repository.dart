@@ -94,6 +94,8 @@ class AuthRepository {
       await firestore.clearPersistence();
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(loggedInSharedPrefsString, false);
+      await auth.signOut();
+      showCustomSnackBar(message: userAccountDeletionCompleteMessage);
     } catch (e) {
       showCustomSnackBar(message: e.toString());
     }

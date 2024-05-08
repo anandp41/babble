@@ -7,6 +7,7 @@ import 'package:babble/core/colors.dart';
 import 'package:babble/features/room/controller/room_controller.dart';
 import '../../../../../core/textstyles.dart';
 import '../../../common/utils/utils.dart';
+import '../../settings/widgets/functions.dart';
 import 'close_open_room_button.dart';
 import 'room_control_bottom_button.dart';
 import 'room_controls_members_list_box.dart';
@@ -99,9 +100,28 @@ class _RoomControlsState extends ConsumerState<RoomControls> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            newRoomData!.name,
-                            style: roomControlRoomNameTextStyle,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  newRoomData!.name,
+                                  style: roomControlRoomNameTextStyle,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    showNameBottomSheet(
+                                        context, newRoomData.name, ref,
+                                        isRoom: true,
+                                        roomId: newRoomData.roomId);
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    color: babbleTitleColor,
+                                  ))
+                            ],
                           ),
                           const SizedBox(
                             height: 10,
