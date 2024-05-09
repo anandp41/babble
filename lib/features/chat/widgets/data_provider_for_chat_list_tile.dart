@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/chat_contact.dart';
 import '../../select_contacts/controller/contacts_controller.dart';
-import '../../select_contacts/repository/contacts_repository.dart';
 import 'chats_list_tile.dart';
 
 class DataProviderForChatListTile extends StatelessWidget {

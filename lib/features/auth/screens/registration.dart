@@ -48,53 +48,59 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
             const SizedBox(
               height: 20,
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: regOtpFieldBgColor,
-                  borderRadius: BorderRadius.circular(messageBorderRadius)),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 50,
-                    width: 120,
-                    child: CountryCodePicker(
-                      textStyle: otpPhoneNumberTextStyle,
-                      padding: EdgeInsets.zero,
-                      initialSelection: 'IN',
-                      favorite: const ['IN'],
-                      dialogTextStyle: otpPhoneNumberTextStyle,
-                      onInit: (value) {
-                        country = CountryCode.fromDialCode("+91");
-                      },
-                      onChanged: (value) {
-                        country = value;
-                      },
+            Center(
+              child: Container(
+                constraints: registrationPhoneEntryBoxConstraint,
+                decoration: BoxDecoration(
+                    color: regOtpFieldBgColor,
+                    borderRadius: BorderRadius.circular(messageBorderRadius)),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: 120,
+                      child: CountryCodePicker(
+                        textStyle: otpPhoneNumberTextStyle,
+                        padding: EdgeInsets.zero,
+                        initialSelection: 'IN',
+                        favorite: const ['IN'],
+                        dialogTextStyle: otpPhoneNumberTextStyle,
+                        onInit: (value) {
+                          country = CountryCode.fromDialCode("+91");
+                        },
+                        onChanged: (value) {
+                          country = value;
+                        },
+                      ),
                     ),
-                  ),
-                  PhoneNumberField(
-                      phoneNumberController: phoneNumberController),
-                ],
+                    PhoneNumberField(
+                        phoneNumberController: phoneNumberController),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await sendPhoneNumber();
-              },
-              style: ButtonStyle(
-                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(messageBorderRadius))),
-                  fixedSize:
-                      const MaterialStatePropertyAll(Size(double.infinity, 56)),
-                  maximumSize: const MaterialStatePropertyAll(Size(1200, 56)),
-                  backgroundColor:
-                      const MaterialStatePropertyAll(otpVerifyButtonBg)),
-              child: const Text(
-                "Send OTP",
-                style: sendVerifyOTPButtonTextstyle,
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await sendPhoneNumber();
+                },
+                style: ButtonStyle(
+                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(messageBorderRadius))),
+                    fixedSize:
+                        const MaterialStatePropertyAll(otpButtonFixedSize),
+                    maximumSize:
+                        const MaterialStatePropertyAll(otpButtonMaxSize),
+                    backgroundColor:
+                        const MaterialStatePropertyAll(otpVerifyButtonBg)),
+                child: const Text(
+                  "Send OTP",
+                  style: sendVerifyOTPButtonTextstyle,
+                ),
               ),
             ),
           ],

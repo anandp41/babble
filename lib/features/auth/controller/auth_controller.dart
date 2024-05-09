@@ -43,6 +43,9 @@ class AuthController {
         verificationId: verificationId, otp: otp, phoneNumber: phoneNumber);
   }
 
+  Future<void> verifyOTPWeb({required String otp}) async =>
+      await authRepository.verifyOTPWeb(otp: otp);
+
   Future<void> saveUserDataToFirebase(String name, File? profilePic) async {
     await authRepository.saveUserDataToFirebase(
         name: name, profilePic: profilePic, ref: ref);
@@ -67,6 +70,10 @@ class AuthController {
     await authRepository.deleteAccount(ref: ref);
   }
 
+  Future<void> logOutOfWeb({required WidgetRef ref}) async {
+    await authRepository.deleteAccount(ref: ref);
+  }
+
   Stream<UserModel> userDataById(String userId) {
     return authRepository.userData(userId);
   }
@@ -80,4 +87,7 @@ class AuthController {
 
   Future<void> deleteUserProfilePic({required WidgetRef ref}) async =>
       await authRepository.deleteUserProfilePic(ref: ref);
+
+  Future<bool> isThisPhoneRegistered({required String phoneNumber}) async =>
+      await authRepository.isThisPhoneRegistered(phoneNumber: phoneNumber);
 }

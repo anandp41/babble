@@ -18,6 +18,7 @@ const String hardcodedPrefilledInviteSMSText =
     "Sign up and hang out with friends on Babble.";
 const String userAccountDeletionCompleteMessage =
     "User account deleted permanently";
+const String userAccountlogOutCompleteMessage = "User logged out successfully";
 const String firebaseSmsDocId = "prefilledSms";
 const String firebaseUsersCollection = 'users';
 const String firebaseRoomsCollection = 'rooms';

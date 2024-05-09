@@ -94,10 +94,9 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                     padding: const EdgeInsets.all(20),
                     child: TextField(
                       controller: nameController,
-                      decoration: InputDecoration(
-                          hintText: "Enter your name",
-                          suffixText:
-                              "${20 - nameController.value.toString().length}"),
+                      decoration: const InputDecoration(
+                        hintText: "Enter your name",
+                      ),
                     ),
                   ),
                 ],

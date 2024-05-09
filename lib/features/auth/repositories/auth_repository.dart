@@ -1,15 +1,16 @@
 import 'dart:io';
-import 'package:babble/common/repositories/common_firebase_repository.dart';
-import 'package:babble/core/strings.dart';
-import 'package:babble/features/room/controller/room_controller.dart';
-import 'package:babble/models/user_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../common/functions/functions.dart';
+import '../../../common/repositories/common_firebase_repository.dart';
+import '../../../core/strings.dart';
+import '../../../models/user_model.dart';
 import '../../home/screens/home.dart';
+import '../../room/controller/room_controller.dart';
 import '../screens/otpscreen.dart';
 import '../screens/user_information.dart';
 
@@ -101,22 +102,53 @@ class AuthRepository {
     }
   }
 
+  Future<void> logOutOfWeb({required WidgetRef ref}) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(loggedInSharedPrefsString, false);
+      await auth.signOut();
+      await firestore.terminate();
+      await firestore.clearPersistence();
+      showCustomSnackBar(message: userAccountlogOutCompleteMessage);
+    } catch (e) {
+      showCustomSnackBar(message: e.toString());
+    }
+  }
+
+  late ConfirmationResult result;
   Future<void> signInWithPhone(String phoneNumber) async {
     try {
-      await auth.verifyPhoneNumber(
-          verificationCompleted: (PhoneAuthCredential credential) async {
-            await auth.signInWithCredential(credential);
-          },
-          verificationFailed: (FirebaseAuthException ex) {
-            throw Exception(ex.message);
-          },
-          codeSent: (String verificationId, int? forceResendingToken) {
-            Get.to(() => const OTPScreen(),
-                arguments: [verificationId, phoneNumber]);
-          },
-          codeAutoRetrievalTimeout: (String verificationId) {},
-          phoneNumber: phoneNumber);
+      if (kIsWeb) {
+        result = await auth.signInWithPhoneNumber(phoneNumber);
+        Get.to(() => const OTPScreen());
+      } else {
+        await auth.verifyPhoneNumber(
+            verificationCompleted: (PhoneAuthCredential credential) async {
+              await auth.signInWithCredential(credential);
+            },
+            verificationFailed: (FirebaseAuthException ex) {
+              throw Exception(ex.message);
+            },
+            codeSent: (String verificationId, int? forceResendingToken) {
+              Get.to(() => const OTPScreen(),
+                  arguments: [verificationId, phoneNumber]);
+            },
+            codeAutoRetrievalTimeout: (String verificationId) {},
+            phoneNumber: phoneNumber);
+      }
     } on FirebaseException catch (e) {
+      showCustomSnackBar(message: e.toString());
+    }
+  }
+
+  Future<void> verifyOTPWeb({required String otp}) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: result.verificationId, smsCode: otp);
+      await auth.signInWithCredential(credential);
+
+      Get.offAll(() => const Home());
+    } catch (e) {
       showCustomSnackBar(message: e.toString());
     }
   }
@@ -129,8 +161,7 @@ class AuthRepository {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: otp);
       await auth.signInWithCredential(credential);
-      // userPhoneNumber = phoneNumber;
-      Get.offAll(() => const UserInformationScreen());
+      Get.offAll(() => const Home());
     } catch (e) {
       showCustomSnackBar(message: e.toString());
     }
@@ -164,6 +195,17 @@ class AuthRepository {
     } catch (e) {
       showCustomSnackBar(message: e.toString());
     }
+  }
+
+  Future<bool> isThisPhoneRegistered({required String phoneNumber}) async {
+    bool result = false;
+    var usersList = await firestore.collection(firebaseUsersCollection).get();
+    for (var doc in usersList.docs) {
+      if (doc.data()['phoneNumber'] == phoneNumber) {
+        result = true;
+      }
+    }
+    return result;
   }
 
   Stream<UserModel> userData(String userId) {

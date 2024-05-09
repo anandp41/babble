@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,7 +49,9 @@ class _ScreenSplashState extends ConsumerState<ScreenSplash> {
     return Timer(const Duration(seconds: 2), () async {
       await _loadImage();
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await FlutterContacts.requestPermission();
+      if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+        await FlutterContacts.requestPermission();
+      }
       if (_imageLoaded) {
         // Get.off
         bool? loggedIn = prefs.getBool(loggedInSharedPrefsString);

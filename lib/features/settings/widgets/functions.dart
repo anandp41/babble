@@ -94,6 +94,42 @@ deleteAccountDialog(BuildContext context, WidgetRef ref) {
       });
 }
 
+logOutDialog(BuildContext context, WidgetRef ref) {
+  return showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Are you sure?"),
+          content: const Text("Tapping 'Yes' will log out"),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                await ref
+                    .read(authControllerProvider)
+                    .deleteAccountPermanenlty(ref: ref);
+                Get.offAll(() => const RegistrationScreen(),
+                    transition: Transition.zoom);
+              },
+              child: const Text(
+                "Yes",
+                style: settingsRedButtonTS,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text(
+                "No",
+                style: settingsButtonTS,
+              ),
+            ),
+          ],
+        );
+      });
+}
+
 Future<dynamic> showNameBottomSheet(
     BuildContext context, String name, WidgetRef ref,
     {bool isRoom = false, String? roomId}) {
