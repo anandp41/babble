@@ -5,6 +5,7 @@ import 'package:babble/core/radii.dart';
 import '../../../../../models/chat_contact.dart';
 import '../../../common/widgets/custom_search_bar.dart';
 import '../../../common/widgets/error_screen.dart';
+import '../../../core/colors.dart';
 import '../controller/chat_controller.dart';
 import '../widgets/chat_list_builder_from_snapshot.dart';
 

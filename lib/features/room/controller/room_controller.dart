@@ -77,4 +77,15 @@ class RoomController {
   Stream<List<String>>? getSpeakersStreamOfRoom({required String roomId}) {
     return roomRepository.getSpeakersStreamOfRoom(roomId);
   }
+
+  Future<void> updateRoomName(
+      {required WidgetRef ref,
+      required String name,
+      required String roomId}) async {
+    await roomRepository.updateRoomName(
+      name: name,
+      ref: ref,
+      roomId: roomId,
+    );
+  }
 }

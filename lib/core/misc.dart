@@ -11,3 +11,9 @@ const widthToDecreaseForMessageCard = 55;
 const messageBorderRadius = 15.0;
 const floatingActionButtonIconSize = 30.0;
 const floatingActionButtonPadding = 14.0;
+//Sizes
+const otpButtonFixedSize = Size(double.infinity, 56);
+const otpButtonMaxSize = Size(400, 56);
+//BoxConstraint
+const registrationPhoneEntryBoxConstraint =
+    BoxConstraints(maxWidth: 400, maxHeight: 56);

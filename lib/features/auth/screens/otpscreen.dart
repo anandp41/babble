@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
@@ -64,21 +65,29 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await verifyOTP(ref, otpController.text.trim());
-              },
-              style: ButtonStyle(
-                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8))),
-                  fixedSize:
-                      const MaterialStatePropertyAll(Size(double.infinity, 56)),
-                  maximumSize: const MaterialStatePropertyAll(Size(1200, 56)),
-                  backgroundColor:
-                      const MaterialStatePropertyAll(otpVerifyButtonBg)),
-              child: const Text(
-                "Verify",
-                style: sendVerifyOTPButtonTextstyle,
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (kIsWeb) {
+                    await ref
+                        .read(authControllerProvider)
+                        .verifyOTPWeb(otp: otpController.text.trim());
+                  } else {
+                    await verifyOTP(ref, otpController.text.trim());
+                  }
+                },
+                style: ButtonStyle(
+                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8))),
+                    fixedSize: const MaterialStatePropertyAll(
+                        Size(double.infinity, 56)),
+                    maximumSize: const MaterialStatePropertyAll(Size(1200, 56)),
+                    backgroundColor:
+                        const MaterialStatePropertyAll(otpVerifyButtonBg)),
+                child: const Text(
+                  "Verify",
+                  style: sendVerifyOTPButtonTextstyle,
+                ),
               ),
             ),
           ],

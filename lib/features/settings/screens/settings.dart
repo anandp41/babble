@@ -4,6 +4,7 @@ import 'package:babble/core/strings.dart';
 import 'package:babble/features/auth/controller/privacy_policy_terms_and_conditions_controller.dart';
 import 'package:babble/features/chat/widgets/profile_pic_viewer.dart';
 import 'package:babble/common/widgets/list_tile_separator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
@@ -117,7 +118,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const ListTileSeparator(),
                     TandCButton(ref: ref, screenSize: screenSize),
                     const ListTileSeparator(),
-                    DeleteAccountButton(ref: ref),
+                    kIsWeb
+                        ? LogOutButton(ref: ref)
+                        : DeleteAccountButton(ref: ref),
                     const ListTileSeparator(),
                     const AboutBabbleButton(),
                   ],

@@ -34,7 +34,7 @@ class SettingsNamePanel extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    showNameBottomSheet(context, userData, ref);
+                    showNameBottomSheet(context, userData.name, ref);
                   },
                   icon: const Icon(
                     Icons.edit,

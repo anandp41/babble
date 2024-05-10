@@ -92,6 +92,16 @@ class RoomRepository {
         .update({'roomPic': newRoomPicUrl});
   }
 
+  Future<void> updateRoomName(
+      {required WidgetRef ref,
+      required String name,
+      required String roomId}) async {
+    await firestore
+        .collection(firebaseRoomsCollection)
+        .doc(roomId)
+        .update({'name': name});
+  }
+
   Future<void> deleteRoomPhoto(
       {required String roomId, required WidgetRef ref}) async {
     await ref

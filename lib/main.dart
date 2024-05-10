@@ -9,7 +9,6 @@ import 'package:in_app_update/in_app_update.dart';
 import 'common/functions/functions.dart';
 import 'core/colors.dart';
 import 'core/strings.dart';
-import 'features/landing/screens/screen_splash.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -79,7 +78,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: babbleTitleColor),
         useMaterial3: true,
       ),
-      home: const ScreenSplash(),
+      home: platformHandler(),
       debugShowCheckedModeBanner: false,
     );
   }
