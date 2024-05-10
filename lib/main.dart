@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +17,18 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  if (!kDebugMode) {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider: AndroidProvider.playIntegrity,
+      appleProvider: AppleProvider.appAttest,
+      webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+    );
+  } else {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider: AndroidProvider.debug,
+      appleProvider: AppleProvider.debug,
+    );
+  }
   runApp(const ProviderScope(
     child: MyApp(),
   ));
@@ -30,7 +45,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    checkForUpdate();
+    if (!kIsWeb && Platform.isAndroid) {
+      checkForUpdate();
+    }
   }
 
   Future<void> checkForUpdate() async {
