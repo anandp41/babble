@@ -15,9 +15,11 @@ dependencies:
   emoji_picker_flutter: ^2.1.1
   enough_giphy_flutter: ^0.4.1
   file_picker: ^6.2.1
+  firebase_analytics: ^10.10.5
   firebase_app_check: ^0.2.1+18
   firebase_auth: ^4.17.8
   firebase_core: ^2.27.0
+  firebase_crashlytics: ^3.5.5
   firebase_storage: ^11.6.10
   flutter:
     sdk: flutter
