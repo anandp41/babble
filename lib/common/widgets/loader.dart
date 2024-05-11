@@ -1,5 +1,6 @@
-import 'package:babble/core/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/colors.dart';
 
 class Loader extends StatelessWidget {
   const Loader({super.key});

@@ -1,12 +1,12 @@
-import 'package:babble/features/chat/widgets/profile_pic_viewer.dart';
-import 'package:babble/models/chat_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import '../../../../../core/radii.dart';
 import '../../../../../core/strings.dart';
+import '../../../models/chat_contact.dart';
 import '../screens/chat_screen.dart';
 import 'chat_list_tile_name_field.dart';
+import 'profile_pic_viewer.dart';
 
 class ChatsListTile extends ConsumerWidget {
   final ChatContact chatContactData;

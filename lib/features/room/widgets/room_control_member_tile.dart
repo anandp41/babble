@@ -1,8 +1,3 @@
-import 'package:babble/common/widgets/error_screen.dart';
-import 'package:babble/common/widgets/loader.dart';
-import 'package:babble/features/auth/controller/auth_controller.dart';
-import 'package:babble/features/room/controller/room_controller.dart';
-import 'package:babble/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,11 +5,16 @@ import 'package:get/get.dart';
 
 import '../../../../../core/colors.dart';
 import '../../../../../core/textstyles.dart';
+import '../../../common/widgets/error_screen.dart';
+import '../../../common/widgets/loader.dart';
 import '../../../core/radii.dart';
 import '../../../core/strings.dart';
 import '../../../models/room_model.dart';
+import '../../../models/user_model.dart';
+import '../../auth/controller/auth_controller.dart';
 import '../../chat/screens/chat_screen.dart';
 import '../../select_contacts/repository/contacts_repository.dart';
+import '../controller/room_controller.dart';
 
 class RoomControlMemberTile extends ConsumerWidget {
   final UserModel userData;

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-
-import 'package:babble/features/room/controller/room_controller.dart';
-
 import '../../../../../core/radii.dart';
 import '../../../../../core/strings.dart';
 import '../../../../../core/textstyles.dart';
 import '../../../../../models/room_model.dart';
 import '../../../core/colors.dart';
+import '../controller/room_controller.dart';
 import 'room_controls.dart';
 
 class RoomAppBar extends ConsumerWidget {

@@ -1,10 +1,10 @@
-import 'package:babble/common/widgets/otp_appbar.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/colors.dart';
 import '../../../../../core/misc.dart';
 import '../../../../../core/textstyles.dart';
+import '../../../common/widgets/otp_appbar.dart';
 import '../../../core/strings.dart';
 import '../controller/auth_controller.dart';
 import '../widgets/phone_number_field.dart';

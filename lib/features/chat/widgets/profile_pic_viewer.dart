@@ -1,13 +1,11 @@
-import 'package:babble/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:transparent_image/transparent_image.dart';
-
-import 'package:babble/features/room/controller/room_controller.dart';
-
 import '../../../core/colors.dart';
 import '../../../core/textstyles.dart';
+import '../../auth/controller/auth_controller.dart';
+import '../../room/controller/room_controller.dart';
 
 class ProfilePicViewer extends ConsumerStatefulWidget {
   final String imageUrl;

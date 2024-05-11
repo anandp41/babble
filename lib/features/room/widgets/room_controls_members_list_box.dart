@@ -33,7 +33,8 @@ class RoomControlsMembersListBox extends ConsumerWidget {
               return FutureBuilder(
                   future: ref
                       .read(authControllerProvider)
-                      .getAUserData(uid: newRoomData!.membersUid[index]),
+                      .getAUserData(uid: newRoomData!.membersUid[index])
+                      .last,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return const SizedBox(

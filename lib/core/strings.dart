@@ -1,5 +1,5 @@
 //app publishing details
-const appVersion = '1.0.0';
+const appVersion = '1.0.1';
 const myEmail = 'apanandp41@gmail.com';
 const String myLinkedInUrl = 'https://www.linkedin.com/in/anand-p-87ab77248/';
 
@@ -17,8 +17,8 @@ const String regPageWelcomeMessage = 'Welcome! Glad to see you!';
 const String hardcodedPrefilledInviteSMSText =
     "Sign up and hang out with friends on Babble.";
 const String userAccountDeletionCompleteMessage =
-    "User account deleted permanently";
-const String userAccountlogOutCompleteMessage = "User logged out successfully";
+    "Your account has been deleted";
+const String userAccountlogOutCompleteMessage = "You have logged out";
 const String firebaseSmsDocId = "prefilledSms";
 const String firebaseUsersCollection = 'users';
 const String firebaseRoomsCollection = 'rooms';

@@ -1,4 +1,4 @@
-import 'package:babble/common/enums/message_enum.dart';
+import '../common/enums/message_enum.dart';
 
 class Message {
   final String senderId;

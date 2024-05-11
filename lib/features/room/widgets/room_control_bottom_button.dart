@@ -1,10 +1,10 @@
-import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/colors.dart';
 import '../../../core/textstyles.dart';
+import '../controller/room_controller.dart';
 
 class RoomControlBottomButton extends ConsumerWidget {
   final bool isHost;

@@ -1,12 +1,11 @@
-import 'package:babble/features/settings/widgets/pp_and_tc_viewer_holder_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-
 import '../../../core/colors.dart';
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
 import '../../auth/controller/privacy_policy_terms_and_conditions_controller.dart';
+import 'pp_and_tc_viewer_holder_scaffold.dart';
 
 class TandCButton extends StatelessWidget {
   const TandCButton({

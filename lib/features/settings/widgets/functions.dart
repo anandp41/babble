@@ -1,16 +1,17 @@
-import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../common/functions/functions.dart';
 import '../../../core/colors.dart';
+import '../../../core/misc.dart';
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
 import '../../auth/controller/auth_controller.dart';
 import '../../auth/screens/registration.dart';
+import '../../auth/screens/web_login.dart';
+import '../../room/controller/room_controller.dart';
 
 babbleAboutDialog(BuildContext context) {
   return showAboutDialog(
@@ -72,8 +73,15 @@ deleteAccountDialog(BuildContext context, WidgetRef ref) {
                 await ref
                     .read(authControllerProvider)
                     .deleteAccountPermanenlty(ref: ref);
+                Get.back();
                 Get.offAll(() => const RegistrationScreen(),
                     transition: Transition.zoom);
+                showCustomSnackBar(
+                    title: "Success",
+                    message: userAccountDeletionCompleteMessage,
+                    backgroundColor: Colors.green,
+                    borderRadius: 2 * messageBorderRadius,
+                    margin: const EdgeInsets.only(bottom: 20));
               },
               child: const Text(
                 "Yes",
@@ -105,11 +113,15 @@ logOutDialog(BuildContext context, WidgetRef ref) {
           actions: [
             TextButton(
               onPressed: () async {
-                await ref
-                    .read(authControllerProvider)
-                    .deleteAccountPermanenlty(ref: ref);
-                Get.offAll(() => const RegistrationScreen(),
+                await ref.read(authControllerProvider).logOutOfWeb(ref: ref);
+                Get.offAll(() => const WebLoginScreen(),
                     transition: Transition.zoom);
+                showCustomSnackBar(
+                    title: "Success",
+                    message: userAccountlogOutCompleteMessage,
+                    backgroundColor: Colors.green,
+                    borderRadius: 2 * messageBorderRadius,
+                    margin: const EdgeInsets.only(bottom: 20));
               },
               child: const Text(
                 "Yes",

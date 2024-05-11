@@ -1,5 +1,6 @@
-import 'package:babble/common/enums/message_enum.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../enums/message_enum.dart';
 
 class MessageReply {
   final String message;

@@ -1,12 +1,12 @@
 name: babble
 description: "A social audio room app for your gang"
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+2
 environment:
   sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
-  audioplayers: 5.0.0
+  audioplayers: ^6.0.0
   cached_network_image: ^3.3.1
   cached_video_player: ^2.0.4
   cloud_firestore: ^4.15.10
@@ -44,9 +44,9 @@ dependencies:
   swipe_to: ^1.0.2
   transparent_image: ^2.0.1
   url_launcher: ^6.2.6
-  uuid: 3.0.7
-  zego_express_engine: ^3.13.3
-  zego_uikit_prebuilt_live_audio_room: 2.13.7
+  uuid: ^4.4.0
+  zego_express_engine: ^3.14.5+2
+  zego_uikit_prebuilt_live_audio_room: ^3.6.7
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -58,9 +58,18 @@ flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/icon/icon.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
+  min_sdk_android: 23 # android min sdk min:16, default 21
   adaptive_icon_foreground: "assets/icon/icon_foreground.png"
   adaptive_icon_background: "#ffffff"
+  web:
+    generate: true
+    background_color: "#7F7F7E"
+    theme_color: "#7F7F7E"
+  windows:
+    generate: true
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
 
 flutter:
   fonts:

@@ -1,14 +1,15 @@
-import 'package:babble/features/select_contacts/repository/contacts_repository.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../repository/contacts_repository.dart';
 
 final getContactsProvider = FutureProvider((ref) async {
   final contactsRepository = ref.watch(selectContactControllerProvider);
   return await contactsRepository.getContacts();
 });
-final contactsOnBabbleProvider = FutureProvider((ref) async {
+final savedContactsOnBabbleProvider = FutureProvider((ref) async {
   final contactsRepository = ref.watch(selectContactControllerProvider);
-  return await contactsRepository.checkIfOnBabble();
+  return await contactsRepository.savedContactsOnBabble();
 });
 final selectContactControllerProvider = Provider((ref) {
   final contactsRepository = ref.watch(contactsRepositoryProvider);
@@ -30,6 +31,9 @@ class SelectContactController {
       await contactsRepository.ifSavedContactName(
           phoneNumberFromServerToCheck: phoneNumberFromServerToCheck);
 
-  Future<List<Map<String, String>>> checkIfOnBabble() async =>
-      await contactsRepository.checkIfOnBabble();
+  Future<List<Map<String, String>>> savedContactsOnBabble() async =>
+      await contactsRepository.savedContactsOnBabble();
+
+  Future<void> updateSavedContactsListToServe({required WidgetRef ref}) async =>
+      await contactsRepository.updateSavedContactsListToServer(ref: ref);
 }

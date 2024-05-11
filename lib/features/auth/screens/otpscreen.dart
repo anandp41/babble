@@ -8,7 +8,9 @@ import '../../../../../core/otp_pin_theme.dart';
 import '../../../../../core/misc.dart';
 import '../../../../../core/textstyles.dart';
 import '../../../common/widgets/otp_appbar.dart';
+import '../../home/screens/home.dart';
 import '../controller/auth_controller.dart';
+import 'user_information.dart';
 
 class OTPScreen extends ConsumerStatefulWidget {
   const OTPScreen({super.key});
@@ -68,13 +70,10 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  if (kIsWeb) {
-                    await ref
-                        .read(authControllerProvider)
-                        .verifyOTPWeb(otp: otpController.text.trim());
-                  } else {
-                    await verifyOTP(ref, otpController.text.trim());
-                  }
+                  await verifyOTP(ref, otpController.text.trim());
+                  kIsWeb
+                      ? Get.offAll(() => const Home())
+                      : Get.offAll(() => const UserInformationScreen());
                 },
                 style: ButtonStyle(
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(

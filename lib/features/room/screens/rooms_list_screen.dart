@@ -1,11 +1,11 @@
-import 'package:babble/features/room/controller/room_controller.dart';
-import 'package:babble/core/radii.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../../../core/colors.dart';
 import '../../../common/widgets/custom_search_bar.dart';
 import '../../../common/widgets/error_screen.dart';
+import '../../../core/radii.dart';
 import '../../auth/controller/auth_controller.dart';
+import '../controller/room_controller.dart';
 import '../widgets/rooms_list_tile.dart';
 
 class RoomsListScreen extends ConsumerStatefulWidget {

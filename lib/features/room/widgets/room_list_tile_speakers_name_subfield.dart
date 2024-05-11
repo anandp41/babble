@@ -1,12 +1,11 @@
-import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../core/colors.dart';
 import '../../../core/textstyles.dart';
 import '../../../models/room_model.dart';
 import '../../../models/user_model.dart';
 import '../../select_contacts/repository/contacts_repository.dart';
+import '../controller/room_controller.dart';
 
 class RoomListTileSpeakersNameSubField extends ConsumerWidget {
   const RoomListTileSpeakersNameSubField({

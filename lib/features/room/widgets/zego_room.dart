@@ -37,126 +37,129 @@ class LiveAudioRoomPage extends ConsumerWidget {
             ));
           }
           return ZegoUIKitPrebuiltLiveAudioRoom(
-              appID: ZegoCloudConfig.appId, // your AppID,
-              appSign: ZegoCloudConfig.appSign,
-              userID: userData!.uid,
-              userName: userData!.phoneNumber,
-              roomID: roomId,
-              config: (isHost
-                  ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
-                  : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience())
-                ..seatConfig = ZegoLiveAudioRoomSeatConfig(
-                    avatarBuilder: (context, size, user, extraInfo) {
-                      if (user!.microphone.value) {
-                        Future(() => ref
-                            .read(roomControllerProvider)
-                            .addPhoneNumberAsSpeaking(
-                                roomId: roomId,
-                                phoneNumber: userData!.phoneNumber));
-                      } else {
-                        Future(() => ref
-                            .read(roomControllerProvider)
-                            .removePhoneNumberAsSpeaking(
-                                roomId: roomId,
-                                phoneNumber: userData!.phoneNumber));
-                      }
-                      return FutureBuilder(
-                        initialData: const AssetImage(defaultProfilePic),
-                        future: Future(() async {
-                          var profilePic = await ref
-                              .watch(chatControllerProvider)
-                              .getProfilePicOfAUser(userId: user.id);
-                          if (profilePic == '') {
-                            return const AssetImage(defaultProfilePic);
-                          } else {
-                            return NetworkImage(profilePic);
-                          }
-                        }),
-                        builder: (context, snapshot) => Stack(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage:
-                                  snapshot.data! as ImageProvider<Object>,
-                              radius: chatListImageRadii,
-                            ),
-                            if (user.id != userData!.uid)
-                              FutureBuilder(
-                                future: ref
-                                    .read(contactsRepositoryProvider)
-                                    .ifSavedContactName(
-                                        phoneNumberFromServerToCheck:
-                                            user.name),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                          ConnectionState.done &&
-                                      user.name != snapshot.data) {
-                                    return Align(
-                                        alignment: Alignment.topCenter,
-                                        child: Text(
-                                          snapshot.data!.split(' ').first,
-                                          textAlign: TextAlign.center,
-                                          style: roomSpeakingMemberInNameTS,
-                                        ));
-                                  } else {
-                                    return const SizedBox.shrink();
-                                  }
-                                },
-                              )
-                            else
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  "You",
-                                  textAlign: TextAlign.center,
-                                  style: roomSpeakingMemberInNameTS,
-                                ),
-                              ),
-                          ],
-                        ),
-                      );
-                    },
-                    showSoundWaveInAudioMode: true)
-                ..durationConfig = ZegoLiveDurationConfig(isVisible: true)
-                ..useSpeakerWhenJoining = false
-                ..onLeaveLiveAudioRoom = (isFromMinimizing) async {
-                  await ref
-                      .read(roomControllerProvider)
-                      .removePhoneNumberAsSpeaking(
-                          roomId: roomId, phoneNumber: userData!.phoneNumber);
-                  Get.back();
-                }
-                ..turnOnMicrophoneWhenJoining = true
-                ..background = Container(
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: roomBgGradientList)),
-                )
-                ..turnOnMicrophoneWhenJoining = true
-                ..closeSeatsWhenJoining = false
-                ..memberListConfig = ZegoMemberListConfig(
-                  itemBuilder: (context, size, user, extraInfo) {
-                    if (user.id == userData!.uid) {
-                      return const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "You",
-                          softWrap: true,
-                          maxLines: 1,
-                          textWidthBasis: TextWidthBasis.parent,
-                          overflow: TextOverflow.ellipsis,
-                          style: roomListTileNameTextStyle,
-                        ),
-                      );
-                    }
+            events: ZegoUIKitPrebuiltLiveAudioRoomEvents(
+              onLeaveConfirmation: (event, defaultAction) async {
+                await ref
+                    .read(roomControllerProvider)
+                    .removePhoneNumberAsSpeaking(
+                        roomId: roomId, phoneNumber: userData!.phoneNumber);
+                Get.back();
 
-                    return RoomOccupantNameTile(
-                      user: user,
+                return defaultAction.call();
+              },
+            ),
+            appID: ZegoCloudConfig.appId, // your AppID,
+            appSign: ZegoCloudConfig.appSign,
+            userID: userData!.uid,
+            userName: userData!.phoneNumber,
+            roomID: roomId,
+            config: (isHost
+                ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
+                : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience())
+              ..seat = ZegoLiveAudioRoomSeatConfig(
+                  avatarBuilder: (context, size, user, extraInfo) {
+                    if (user!.microphone.value) {
+                      Future(() => ref
+                          .read(roomControllerProvider)
+                          .addPhoneNumberAsSpeaking(
+                              roomId: roomId,
+                              phoneNumber: userData!.phoneNumber));
+                    } else {
+                      Future(() => ref
+                          .read(roomControllerProvider)
+                          .removePhoneNumberAsSpeaking(
+                              roomId: roomId,
+                              phoneNumber: userData!.phoneNumber));
+                    }
+                    return FutureBuilder(
+                      initialData: const AssetImage(defaultProfilePic),
+                      future: Future(() async {
+                        var profilePic = await ref
+                            .watch(chatControllerProvider)
+                            .getProfilePicOfAUser(userId: user.id);
+                        if (profilePic == '') {
+                          return const AssetImage(defaultProfilePic);
+                        } else {
+                          return NetworkImage(profilePic);
+                        }
+                      }),
+                      builder: (context, snapshot) => Stack(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage:
+                                snapshot.data! as ImageProvider<Object>,
+                            radius: chatListImageRadii,
+                          ),
+                          if (user.id != userData!.uid)
+                            FutureBuilder(
+                              future: ref
+                                  .read(contactsRepositoryProvider)
+                                  .ifSavedContactName(
+                                      phoneNumberFromServerToCheck: user.name),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.done &&
+                                    user.name != snapshot.data) {
+                                  return Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        snapshot.data!.split(' ').first,
+                                        textAlign: TextAlign.center,
+                                        style: roomSpeakingMemberInNameTS,
+                                      ));
+                                } else {
+                                  return const SizedBox.shrink();
+                                }
+                              },
+                            )
+                          else
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                "You",
+                                textAlign: TextAlign.center,
+                                style: roomSpeakingMemberInNameTS,
+                              ),
+                            ),
+                        ],
+                      ),
                     );
                   },
-                ),
-              controller: ZegoLiveAudioRoomController()..openSeats());
+                  showSoundWaveInAudioMode: true)
+              ..duration = ZegoLiveAudioRoomLiveDurationConfig(isVisible: true)
+              ..useSpeakerWhenJoining = false
+              ..turnOnMicrophoneWhenJoining = true
+              ..background = Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: roomBgGradientList)),
+              )
+              ..turnOnMicrophoneWhenJoining = true
+              ..seat.closeWhenJoining = false
+              ..memberList = ZegoLiveAudioRoomMemberListConfig(
+                itemBuilder: (context, size, user, extraInfo) {
+                  if (user.id == userData!.uid) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "You",
+                        softWrap: true,
+                        maxLines: 1,
+                        textWidthBasis: TextWidthBasis.parent,
+                        overflow: TextOverflow.ellipsis,
+                        style: roomListTileNameTextStyle,
+                      ),
+                    );
+                  }
+
+                  return RoomOccupantNameTile(
+                    user: user,
+                  );
+                },
+              ),
+          );
         });
   }
 }

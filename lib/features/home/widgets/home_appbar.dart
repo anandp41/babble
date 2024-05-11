@@ -1,11 +1,10 @@
-import 'package:babble/core/misc.dart';
-import 'package:babble/features/settings/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/colors.dart';
 import '../../../common/widgets/babble_title.dart';
+import '../../../core/misc.dart';
 import '../../../core/textstyles.dart';
+import '../../settings/screens/settings.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({

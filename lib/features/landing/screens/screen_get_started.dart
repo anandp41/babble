@@ -1,8 +1,8 @@
-import 'package:babble/core/colors.dart';
-import 'package:babble/core/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../common/widgets/babble_title.dart';
+import '../../../core/colors.dart';
+import '../../../core/strings.dart';
 import '../widgets/get_started_button.dart';
 import '../widgets/privacy_policy_terms_conditons_text.dart';
 

@@ -1,6 +1,6 @@
-import 'package:babble/core/colors.dart';
-//import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/colors.dart';
 
 class DocViewer extends StatefulWidget {
   final String path;
@@ -28,11 +28,6 @@ class _DocViewerState extends State<DocViewer> {
         child: CircularProgressIndicator(
       color: babbleTitleColor,
     ));
-    // if (_documentBytes != null) {
-    //   child = SfPdfViewer.memory(
-    //     _documentBytes!,
-    //   );
-    // }
     return Scaffold(
       backgroundColor: bodyBackgroundColor,
       appBar: AppBar(title: const Text('PDF Viewer')),

@@ -1,10 +1,8 @@
 import 'dart:io';
-
-import 'package:babble/common/enums/message_enum.dart';
-import 'package:babble/common/providers/message_reply_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../../common/enums/message_enum.dart';
+import '../../../common/providers/message_reply_provider.dart';
 import '../../auth/controller/auth_controller.dart';
 import '../../../../../models/chat_contact.dart';
 import '../../../../../models/message.dart';

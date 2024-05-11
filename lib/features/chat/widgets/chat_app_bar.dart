@@ -1,13 +1,13 @@
-import 'package:babble/features/select_contacts/repository/contacts_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:babble/models/user_model.dart';
 import '../../../../../core/colors.dart';
 import '../../../../../core/radii.dart';
 import '../../../../../core/strings.dart';
 import '../../../../../core/textstyles.dart';
 import '../../../common/widgets/appbar_back_button.dart';
+import '../../../models/user_model.dart';
 import '../../auth/controller/auth_controller.dart';
+import '../../select_contacts/repository/contacts_repository.dart';
 import 'profile_pic_viewer.dart';
 
 class ChatAppBar extends ConsumerWidget {
@@ -53,7 +53,8 @@ class ChatAppBar extends ConsumerWidget {
                       ),
               ),
               StreamBuilder<UserModel>(
-                  stream: ref.read(authControllerProvider).userDataById(uid),
+                  stream:
+                      ref.watch(authControllerProvider).getAUserData(uid: uid),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const SizedBox();

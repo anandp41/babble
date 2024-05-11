@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:babble/core/colors.dart';
-import 'package:babble/core/radii.dart';
 import '../../../../../models/chat_contact.dart';
 import '../../../common/widgets/custom_search_bar.dart';
 import '../../../common/widgets/error_screen.dart';
 import '../../../core/colors.dart';
+import '../../../core/radii.dart';
 import '../controller/chat_controller.dart';
 import '../widgets/chat_list_builder_from_snapshot.dart';
 

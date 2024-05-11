@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:babble/features/room/repositories/room_repository.dart';
-
 import '../../../models/room_model.dart';
+import '../repositories/room_repository.dart';
 
 final roomControllerProvider = Provider((ref) {
   final roomRepository = ref.watch(roomRepositoryProvider);

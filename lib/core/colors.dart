@@ -9,7 +9,7 @@ const bodyBackgroundColor =
         Color(0xFF7F7F7E),
     bottomNavBarColor = Color(0xFF1F384F),
     roomTileSpeakingMicIcon = Color.fromARGB(255, 14, 172, 19),
-    otpSubColor = Color(0xFF838BA1),
+    otpSubColor = regTitleColor,
     regTitleColor = Color.fromRGBO(30, 35, 44, 1),
     kWhite = Colors.white,
     regOtpFieldBgColor = kWhite,

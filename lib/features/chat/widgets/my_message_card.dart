@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:babble/common/enums/message_enum.dart';
 import 'package:swipe_to/swipe_to.dart';
-
 import '../../../../../core/colors.dart';
 import '../../../../../core/misc.dart';
 import '../../../../../core/textstyles.dart';
+import '../../../common/enums/message_enum.dart';
 import 'display_file.dart';
 
 class MyMessageCard extends StatelessWidget {

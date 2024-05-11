@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../core/strings.dart';
 import '../../../models/user_model.dart';
+import '../../auth/controller/auth_controller.dart';
 
 final contactsRepositoryProvider = Provider(
   (ref) => ContactsRepository(firestore: FirebaseFirestore.instance),
@@ -13,6 +13,7 @@ final contactsRepositoryProvider = Provider(
 class ContactsRepository {
   final FirebaseFirestore firestore;
   ContactsRepository({required this.firestore});
+  List<Map<String, String>> savedContacts = [];
 
   Future<List<Contact>> getContacts() async {
     List<Contact> contacts = [];
@@ -52,10 +53,9 @@ class ContactsRepository {
     return name;
   }
 
-  Future<List<Map<String, String>>> checkIfOnBabble() async {
-    List<Contact> contacts = await getContacts();
+  Future<List<Map<String, String>>> savedContactsOnBabble() async {
     List<Map<String, String>> resultContacts = [];
-
+    List<Contact> contacts = await getContacts();
     var userCollection =
         await firestore.collection(firebaseUsersCollection).get();
 
@@ -85,6 +85,7 @@ class ContactsRepository {
             };
             isInUsers = true;
             resultContacts.add(tempContact);
+            savedContacts.add(tempContact);
           }
         }
         if (isInUsers == false) {
@@ -99,5 +100,13 @@ class ContactsRepository {
       }
     }
     return resultContacts;
+  }
+
+  Future<void> updateSavedContactsListToServer({required WidgetRef ref}) async {
+    if (!kIsWeb) {
+      await ref
+          .read(authControllerProvider)
+          .updateSavedContacts(savedContacts: savedContacts, ref: ref);
+    }
   }
 }

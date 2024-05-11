@@ -1,6 +1,7 @@
-import 'package:babble/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_super_html_viewer/flutter_super_html_viewer.dart';
+
+import '../../../core/colors.dart';
 
 class PrivacyPolicyTermsConditionsViewerHolderScaffold extends StatelessWidget {
   final String data;

@@ -1,15 +1,15 @@
 import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:babble/features/chat/widgets/audio_player_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:babble/common/enums/message_enum.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../../../core/misc.dart';
 import '../../../../../core/textstyles.dart';
+import '../../../common/enums/message_enum.dart';
 import '../../../common/widgets/doc_viewer.dart';
+import 'audio_player_widget.dart';
 import 'video_player_item.dart';
 
 class DisplayTextImageGIF extends StatelessWidget {

@@ -1,9 +1,9 @@
-import 'package:babble/common/providers/message_reply_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/colors.dart';
 import '../../../../../core/misc.dart';
+import '../../../common/providers/message_reply_provider.dart';
 import '../../../core/textstyles.dart';
 import 'display_file.dart';
 

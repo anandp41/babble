@@ -1,3 +1,5 @@
+import 'saved_contact.dart';
+
 class UserModel {
   final String name;
   final String uid;
@@ -5,7 +7,7 @@ class UserModel {
   final bool isOnline;
   final String phoneNumber;
   final List<String> roomId;
-
+  final List<SavedContact> savedContacts;
   UserModel({
     required this.name,
     required this.uid,
@@ -13,18 +15,8 @@ class UserModel {
     required this.isOnline,
     required this.phoneNumber,
     required this.roomId,
+    required this.savedContacts,
   });
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      name: map['name'] ?? '',
-      uid: map['uid'] ?? '',
-      profilePic: map['profilePic'] ?? '',
-      isOnline: map['isOnline'] ?? false,
-      phoneNumber: map['phoneNumber'] ?? '',
-      roomId: List<String>.from(map['roomId']),
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -34,6 +26,20 @@ class UserModel {
       'isOnline': isOnline,
       'phoneNumber': phoneNumber,
       'roomId': roomId,
+      'savedContacts': savedContacts.map((x) => x.toMap()).toList(),
     };
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      name: map['name'] ?? '',
+      uid: map['uid'] ?? '',
+      profilePic: map['profilePic'] ?? '',
+      isOnline: map['isOnline'] ?? false,
+      phoneNumber: map['phoneNumber'] ?? '',
+      roomId: List<String>.from(map['roomId']),
+      savedContacts: List<SavedContact>.from(
+          map['savedContacts']?.map((x) => SavedContact.fromMap(x))),
+    );
   }
 }

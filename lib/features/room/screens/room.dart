@@ -1,8 +1,8 @@
-import 'package:babble/features/room/controller/room_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:babble/models/room_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../models/user_model.dart';
+import '../../../models/room_model.dart';
+import '../controller/room_controller.dart';
 import '../widgets/room_appbar.dart';
 import '../widgets/zego_room.dart';
 

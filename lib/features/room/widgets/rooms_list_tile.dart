@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:babble/models/room_model.dart';
 import '../../../../../../../core/radii.dart';
 import '../../../../../../../core/strings.dart';
 import '../../../../../../../models/user_model.dart';
 import '../../../common/functions/functions.dart';
+import '../../../models/room_model.dart';
 import '../../chat/widgets/profile_pic_viewer.dart';
 import '../screens/room.dart';
 import 'room_list_tile_name_field.dart';

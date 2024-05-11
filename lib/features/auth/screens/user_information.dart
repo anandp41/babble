@@ -1,12 +1,15 @@
 import 'dart:io';
-import 'package:babble/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../../core/misc.dart';
 import '../../../../../../core/strings.dart';
 import '../../../../../../core/textstyles.dart';
 import '../../../common/utils/utils.dart';
+import '../../../core/colors.dart';
+import '../../home/screens/home.dart';
+import '../../select_contacts/controller/contacts_controller.dart';
 import '../controller/auth_controller.dart';
 
 class UserInformationScreen extends ConsumerStatefulWidget {
@@ -33,6 +36,12 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     setState(() {});
   }
 
+  void removeSelectedImage() {
+    image = null;
+
+    setState(() {});
+  }
+
   Future<void> storeUserData() async {
     String name = nameController.text.trim();
     if (name.isNotEmpty) {
@@ -44,6 +53,11 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
           .saveUserDataToFirebase(name, image);
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(loggedInSharedPrefsString, true);
+
+      ref.read(savedContactsOnBabbleProvider);
+      await ref
+          .read(selectContactControllerProvider)
+          .updateSavedContactsListToServe(ref: ref);
     }
   }
 
@@ -84,6 +98,27 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                             color: Colors.white,
                           ),
                         )),
+                  ),
+                  Positioned(
+                    top: -5,
+                    right: -5,
+                    child: image != null
+                        ? IconButton(
+                            onPressed: () {
+                              removeSelectedImage();
+                            },
+                            icon: Container(
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.blueGrey,
+                              ),
+                              padding: const EdgeInsets.all(6),
+                              child: const Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.white,
+                              ),
+                            ))
+                        : const SizedBox.shrink(),
                   )
                 ],
               ),
@@ -104,6 +139,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
               ElevatedButton.icon(
                   onPressed: () async {
                     await storeUserData();
+                    Get.offAll(() => const Home());
                   },
                   style: const ButtonStyle(
                       backgroundColor:

@@ -1,8 +1,8 @@
-import 'package:babble/core/strings.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'colors.dart';
 import 'misc.dart';
+import 'strings.dart';
 
 ///////////////////////landing
 const appTitleTextStyle = TextStyle(

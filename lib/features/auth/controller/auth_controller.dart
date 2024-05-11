@@ -3,10 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../models/user_model.dart';
 import '../repositories/auth_repository.dart';
 
-final userDataAuthProvider =
-    FutureProvider.autoDispose<UserModel?>((ref) async {
+final userDataAuthProvider = FutureProvider<UserModel?>((ref) {
   final authController = ref.watch(authControllerProvider);
-  return await authController.getUserData();
+  return authController.getCurrentUserData();
 });
 final smsDataProvider = FutureProvider((ref) async {
   final authController = ref.watch(authControllerProvider);
@@ -43,24 +42,28 @@ class AuthController {
         verificationId: verificationId, otp: otp, phoneNumber: phoneNumber);
   }
 
-  Future<void> verifyOTPWeb({required String otp}) async =>
-      await authRepository.verifyOTPWeb(otp: otp);
+  Future<void> updateSavedContacts(
+          {required List<Map<String, String>> savedContacts,
+          required WidgetRef ref}) async =>
+      await authRepository.updateSavedContacts(savedContacts, ref);
 
   Future<void> saveUserDataToFirebase(String name, File? profilePic) async {
     await authRepository.saveUserDataToFirebase(
         name: name, profilePic: profilePic, ref: ref);
   }
 
-  Future<UserModel?> getUserData() async {
-    UserModel? user = await authRepository.getCurrentUserData();
-    return user;
+  Future<UserModel?> getCurrentUserData() async {
+    return await authRepository.getCurrentUserData();
+    //return user;
   }
 
-  Future<UserModel?> getAUserData({required String uid}) async {
-    UserModel? user = await authRepository.getAUserData(uid);
-    return user;
+  Stream<UserModel> getAUserData({required String uid}) {
+    return authRepository.userData(uid);
   }
 
+//  Stream<UserModel> userDataById(String userId) {
+//     return authRepository.userData(userId);
+  //}
   Future<String> getSmsData() async {
     String data = await authRepository.getSmsData();
     return data;
@@ -71,11 +74,7 @@ class AuthController {
   }
 
   Future<void> logOutOfWeb({required WidgetRef ref}) async {
-    await authRepository.deleteAccount(ref: ref);
-  }
-
-  Stream<UserModel> userDataById(String userId) {
-    return authRepository.userData(userId);
+    await authRepository.logOutOfWeb(ref: ref);
   }
 
   Future<void> setUserState(bool isOnline) async {
