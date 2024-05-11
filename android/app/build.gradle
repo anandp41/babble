@@ -32,7 +32,6 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "com.anand.babble"
     compileSdk 34
-    ndkVersion "25.1.8937393"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
