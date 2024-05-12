@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -26,8 +25,7 @@ class DisplayTextImageGIF extends StatelessWidget {
   void _openAndroidExternalFile({required String path}) async {
     //open an external storage file
     if (await Permission.manageExternalStorage.request().isGranted) {
-      final result = await OpenFilex.open(path);
-      log(result.message);
+      await OpenFilex.open(path);
     }
   }
 

@@ -5,7 +5,6 @@ import '../../../core/textstyles.dart';
 import '../../../models/room_model.dart';
 import '../../../models/user_model.dart';
 import '../../select_contacts/repository/contacts_repository.dart';
-import '../controller/room_controller.dart';
 
 class RoomListTileSpeakersNameSubField extends ConsumerWidget {
   const RoomListTileSpeakersNameSubField({
@@ -19,55 +18,41 @@ class RoomListTileSpeakersNameSubField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return StreamBuilder(
-      stream: ref
-          .watch(roomControllerProvider)
-          .getSpeakersStreamOfRoom(roomId: roomData.roomId),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const SizedBox.shrink();
-        }
-        List<String> speakers = snapshot.data ?? [];
-        var speakingPhoneNumbers = {
-          ...speakers.toSet().toList()..remove(userData!.phoneNumber)
-        };
-        return Expanded(
-            flex: 1,
-            child: speakingPhoneNumbers.isNotEmpty
-                ? Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      const Icon(
-                        Icons.mic,
-                        size: 24,
-                        color: roomTileSpeakingMicIcon,
-                      ),
-                      FutureBuilder(
-                        initialData: speakingPhoneNumbers.join(', '),
-                        future: Future(() async {
-                          List<String> names = [];
-                          for (var number in speakingPhoneNumbers) {
-                            String name = await ref
-                                .read(contactsRepositoryProvider)
-                                .ifSavedContactName(
-                                    phoneNumberFromServerToCheck: number);
-                            names.add(name.split(' ').first);
-                          }
-                          return names.join(', ');
-                        }),
-                        builder: (context, snapshot) {
-                          return Text(
-                            snapshot.data!,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            style: roomsListTileSpeakingTitleTextStyle,
-                          );
-                        },
-                      )
-                    ],
+    return Expanded(
+        flex: 1,
+        child: roomData.speakingPhoneNumbers.isNotEmpty
+            ? Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const Icon(
+                    Icons.mic,
+                    size: 24,
+                    color: roomTileSpeakingMicIcon,
+                  ),
+                  FutureBuilder(
+                    initialData: roomData.speakingPhoneNumbers.join(', '),
+                    future: Future(() async {
+                      List<String> names = [];
+                      for (var number in roomData.speakingPhoneNumbers) {
+                        String name = await ref
+                            .read(contactsRepositoryProvider)
+                            .ifSavedContactName(
+                                phoneNumberFromServerToCheck: number);
+                        names.add(name.split(' ').first);
+                      }
+                      return names.join(', ');
+                    }),
+                    builder: (context, snapshot) {
+                      return Text(
+                        snapshot.data!,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        style: roomsListTileSpeakingTitleTextStyle,
+                      );
+                    },
                   )
-                : const SizedBox.shrink());
-      },
-    );
+                ],
+              )
+            : const SizedBox.shrink());
   }
 }

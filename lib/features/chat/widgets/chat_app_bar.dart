@@ -53,8 +53,9 @@ class ChatAppBar extends ConsumerWidget {
                       ),
               ),
               StreamBuilder<UserModel>(
-                  stream:
-                      ref.watch(authControllerProvider).getAUserData(uid: uid),
+                  stream: ref
+                      .watch(authControllerProvider)
+                      .getAUserDataAsStream(uid: uid),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const SizedBox();

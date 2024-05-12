@@ -36,7 +36,7 @@ class CustomNavBar extends ConsumerWidget {
                   child: IconButton(
                       onPressed: () {
                         ref
-                            .watch(indexBottomNavbarProvider.state)
+                            .watch(indexBottomNavbarProvider.notifier)
                             .update((state) => iconIndex);
                       },
                       icon: Icon(

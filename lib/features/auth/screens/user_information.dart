@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../../core/misc.dart';
 import '../../../../../../core/strings.dart';
 import '../../../../../../core/textstyles.dart';
+import '../../../common/functions/functions.dart';
 import '../../../common/utils/utils.dart';
 import '../../../core/colors.dart';
 import '../../home/screens/home.dart';
@@ -140,6 +141,11 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                   onPressed: () async {
                     await storeUserData();
                     Get.offAll(() => const Home());
+                    showCustomSnackBar(
+                      title: snackBarSuccessTitle,
+                      message: userAccountCreationSuccessSnackBarMessage,
+                      backgroundColor: snackBarSuccessBgColor,
+                    );
                   },
                   style: const ButtonStyle(
                       backgroundColor:

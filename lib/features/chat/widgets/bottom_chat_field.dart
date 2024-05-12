@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:file_picker/file_picker.dart';
@@ -78,7 +77,6 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
       }
       if (isRecording) {
         String? path = await _audioRecorder.stop();
-        log(path ?? "nyeet");
         sendFileMessage(File(path!), MessageEnum.audio);
       } else {
         _audioRecorder.start();
@@ -118,7 +116,6 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     List<PlatformFile>? docs = await Utils.pickDocs();
     if (docs != null) {
       for (var xfile in docs) {
-        log(xfile.path!);
         var doc = File(xfile.path!);
         sendFileMessage(doc, MessageEnum.doc);
       }

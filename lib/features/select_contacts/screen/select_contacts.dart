@@ -151,6 +151,7 @@ class _SelectContactsScreenState extends ConsumerState<SelectContactsScreen> {
                         })
                     : RefreshIndicator(
                         onRefresh: () async {
+                          // ignore: unused_result
                           ref.refresh(savedContactsOnBabbleProvider);
                           await ref
                               .read(selectContactControllerProvider)

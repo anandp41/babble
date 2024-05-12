@@ -16,9 +16,12 @@ const String appTitle = 'Babble',
 const String regPageWelcomeMessage = 'Welcome! Glad to see you!';
 const String hardcodedPrefilledInviteSMSText =
     "Sign up and hang out with friends on Babble.";
-const String userAccountDeletionCompleteMessage =
+const String userAccountDeletionCompleteSnackBarMessage =
     "Your account has been deleted";
-const String userAccountlogOutCompleteMessage = "You have logged out";
+const String snackBarSuccessTitle = 'Success';
+const String userAccountCreationSuccessSnackBarMessage =
+    'Your account has been created';
+const String userAccountlogOutCompleteSnackBarMessage = "You have logged out";
 const String firebaseSmsDocId = "prefilledSms";
 const String firebaseUsersCollection = 'users';
 const String firebaseRoomsCollection = 'rooms';

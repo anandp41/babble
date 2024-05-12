@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-
 import '../../../common/functions/functions.dart';
 import '../../../common/repositories/common_firebase_repository.dart';
 import '../../../core/strings.dart';
 import '../../../models/room_model.dart';
+import '../../../models/user_model.dart';
 import '../../auth/controller/auth_controller.dart';
 
 final roomRepositoryProvider = Provider(
@@ -29,8 +29,8 @@ class RoomRepository {
   });
   Future<List<String>> listRoomsOfUid(String uid) async {
     var userData =
-        await ref.read(authControllerProvider).getAUserData(uid: uid).last;
-    return userData.roomId;
+        await ref.read(authControllerProvider).userDataById(userId: uid);
+    return userData!.roomId;
   }
 
   Future<void> makeRoom(
@@ -43,7 +43,7 @@ class RoomRepository {
         uids.add(selectedContacts[i]['uid']!);
       }
       var roomId = const Uuid().v1();
-      List<String> membersUids = [auth.currentUser!.uid, ...uids];
+      List<String> membersUids = {auth.currentUser!.uid, ...uids}.toList();
       String roomPicUrl = roomPic != null
           ? await ref
               .read(commonFirebaseStorageRepositoryProvider)
@@ -166,8 +166,8 @@ class RoomRepository {
     // remove the room id from all users
     for (String uid in memberUids) {
       var userData =
-          await ref.read(authControllerProvider).getAUserData(uid: uid).last;
-      var roomsOfUser = userData.roomId;
+          await ref.read(authControllerProvider).userDataById(userId: uid);
+      var roomsOfUser = userData!.roomId;
       roomsOfUser.remove(roomId);
       await firestore
           .collection(firebaseUsersCollection)
@@ -191,8 +191,8 @@ class RoomRepository {
 
     ///removing from user's data
     var userData =
-        await ref.read(authControllerProvider).getAUserData(uid: memberId).last;
-    var usersRoomList = userData.roomId;
+        await ref.read(authControllerProvider).userDataById(userId: memberId);
+    var usersRoomList = userData!.roomId;
     usersRoomList.remove(roomId);
     await firestore
         .collection(firebaseUsersCollection)
@@ -213,9 +213,9 @@ class RoomRepository {
       for (int i = 0; i < newUids.length; i++) {
         var userData = await ref
             .read(authControllerProvider)
-            .getAUserData(uid: newUids[i])
-            .last;
-        var usersRoomList = userData.roomId;
+            .userDataById(userId: newUids[i]);
+
+        var usersRoomList = userData!.roomId;
         usersRoomList.add(roomId);
         await firestore
             .collection(firebaseUsersCollection)
@@ -241,6 +241,29 @@ class RoomRepository {
         }
       }
       return rooms;
+    });
+  }
+
+  Stream<List<String>> getRoomsOfThisUSer() {
+    return firestore
+        .collection(firebaseUsersCollection)
+        .doc(auth.currentUser!.uid)
+        .snapshots()
+        .asyncMap((event) async {
+      var user = UserModel.fromMap(event.data()!);
+      List<String> rooms = user.roomId;
+      return rooms;
+    });
+  }
+
+  Stream<RoomModel> getDetailsOfThisRoomStream(String roomId) {
+    return firestore
+        .collection(firebaseRoomsCollection)
+        .doc(roomId)
+        .snapshots()
+        .asyncMap((event) async {
+      var room = RoomModel.fromMap(event.data()!);
+      return room;
     });
   }
 

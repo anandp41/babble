@@ -22,3 +22,4 @@
 -dontwarn com.xiaomi.mipush.sdk.MiPushCommandMessage
 -dontwarn com.xiaomi.mipush.sdk.MiPushMessage
 -dontwarn com.xiaomi.mipush.sdk.PushMessageReceiver
+-dontwarn com.josephcrowell.flutter_sound_record.FlutterSoundRecordPlugin

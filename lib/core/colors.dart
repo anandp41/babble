@@ -54,4 +54,6 @@ const bodyBackgroundColor =
     settingsNameSheetBg = Color.fromARGB(255, 55, 53, 53),
     profilePicViewerBg = Colors.black,
     profilePicViewerTitleColor = Colors.white,
-    profilePicViewerNoImageColor = Colors.white30;
+    profilePicViewerNoImageColor = Colors.white30,
+    snackBarSuccessBgColor = Colors.green,
+    snackBarFailureBgColor = Colors.red;

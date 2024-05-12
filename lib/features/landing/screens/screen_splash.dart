@@ -38,7 +38,7 @@ class _ScreenSplashState extends ConsumerState<ScreenSplash> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const BabbleTitleWidget(),
-          LoadingAnimationWidget.staggeredDotsWave(color: titleColor, size: 40),
+          LoadingAnimationWidget.staggeredDotsWave(color: titleColor, size: 50),
         ],
       )),
       backgroundColor: bodyBackgroundColor,

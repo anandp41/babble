@@ -40,6 +40,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       await ref
           .read(authControllerProvider)
           .updateUserProfilePic(profilePic: image, ref: ref);
+      // ignore: unused_result
       ref.refresh(userDataAuthProvider);
     }
     setState(() {});
@@ -52,7 +53,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return ref.watch(userDataAuthProvider).when(
           data: (userData) {
             return Scaffold(
-              resizeToAvoidBottomInset: true,
+              resizeToAvoidBottomInset: false,
               appBar: const PreferredSize(
                   preferredSize: Size.fromHeight(70), child: SettingsAppBar()),
               body: SafeArea(

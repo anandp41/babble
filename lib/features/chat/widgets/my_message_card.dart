@@ -36,7 +36,7 @@ class MyMessageCard extends StatelessWidget {
 
     final replyMinWidth = MediaQuery.of(context).size.width / 2;
     return SwipeTo(
-      onLeftSwipe: () => onLeftSwipe(),
+      onLeftSwipe: (details) => onLeftSwipe(),
       child: Align(
         alignment: Alignment.centerRight,
         child: ConstrainedBox(

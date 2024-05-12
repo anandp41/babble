@@ -1,3 +1,5 @@
+// ignore_for_file: unused_result
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +28,7 @@ class _MakeRoomScreenState extends ConsumerState<MakeRoomScreen> {
     }
     setState(() {
       ref
-          .read(selectedRoomContacts.state)
+          .read(selectedRoomContacts.notifier)
           .update((state) => [...state, contact]);
     });
   }
@@ -39,6 +41,12 @@ class _MakeRoomScreenState extends ConsumerState<MakeRoomScreen> {
     setState(() {});
   }
 
+  void removeSelectedImage() {
+    image = null;
+
+    setState(() {});
+  }
+
   Future<void> makeRoom() async {
     if (roomNameController.text.trim().isNotEmpty) {
       await ref.read(roomControllerProvider).makeRoom(
@@ -46,7 +54,7 @@ class _MakeRoomScreenState extends ConsumerState<MakeRoomScreen> {
           image,
           ref.read(selectedRoomContacts));
       Get.back();
-      ref.read(selectedRoomContacts.state).update((state) => []);
+      ref.read(selectedRoomContacts.notifier).update((state) => []);
       ref.refresh(userDataAuthProvider);
       ref.refresh(roomControllerProvider);
     }
@@ -104,6 +112,27 @@ class _MakeRoomScreenState extends ConsumerState<MakeRoomScreen> {
                             Icons.add_a_photo,
                             color: Colors.black87,
                           )),
+                    ),
+                    Positioned(
+                      top: -5,
+                      right: -5,
+                      child: image != null
+                          ? IconButton(
+                              onPressed: () {
+                                removeSelectedImage();
+                              },
+                              icon: Container(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.blueGrey,
+                                ),
+                                padding: const EdgeInsets.all(6),
+                                child: const Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.white,
+                                ),
+                              ))
+                          : const SizedBox.shrink(),
                     )
                   ],
                 ),

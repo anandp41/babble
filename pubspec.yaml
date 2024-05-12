@@ -1,7 +1,7 @@
 name: babble
 description: "A social audio room app for your gang"
 publish_to: 'none'
-version: 1.0.1+2
+version: 1.0.2+3
 environment:
   sdk: '>=3.2.6 <4.0.0'
 
@@ -24,13 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_contacts: ^1.1.7+1
-  flutter_riverpod: 2.0.0-dev.9
+  flutter_riverpod: ^2.5.1
   flutter_sound_record: ^3.3.2
   flutter_super_html_viewer: ^0.1.0
-  flutter_switch: ^0.3.2
   get: ^4.6.6
   image_picker: ^1.0.7
-  in_app_update: ^4.2.2
   intl: ^0.18.1
   loading_animation_widget: ^1.2.0+4
   meta: ^1.11.0
@@ -50,7 +48,7 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^3.0.1
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
 

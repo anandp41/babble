@@ -1,3 +1,5 @@
+// ignore_for_file: unused_result
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../common/functions/functions.dart';
 import '../../../core/colors.dart';
-import '../../../core/misc.dart';
 import '../../../core/strings.dart';
 import '../../../core/textstyles.dart';
 import '../../auth/controller/auth_controller.dart';
@@ -77,11 +78,10 @@ deleteAccountDialog(BuildContext context, WidgetRef ref) {
                 Get.offAll(() => const RegistrationScreen(),
                     transition: Transition.zoom);
                 showCustomSnackBar(
-                    title: "Success",
-                    message: userAccountDeletionCompleteMessage,
-                    backgroundColor: Colors.green,
-                    borderRadius: 2 * messageBorderRadius,
-                    margin: const EdgeInsets.only(bottom: 20));
+                  title: snackBarSuccessTitle,
+                  message: userAccountDeletionCompleteSnackBarMessage,
+                  backgroundColor: snackBarSuccessBgColor,
+                );
               },
               child: const Text(
                 "Yes",
@@ -117,11 +117,10 @@ logOutDialog(BuildContext context, WidgetRef ref) {
                 Get.offAll(() => const WebLoginScreen(),
                     transition: Transition.zoom);
                 showCustomSnackBar(
-                    title: "Success",
-                    message: userAccountlogOutCompleteMessage,
-                    backgroundColor: Colors.green,
-                    borderRadius: 2 * messageBorderRadius,
-                    margin: const EdgeInsets.only(bottom: 20));
+                  title: snackBarSuccessTitle,
+                  message: userAccountlogOutCompleteSnackBarMessage,
+                  backgroundColor: snackBarSuccessBgColor,
+                );
               },
               child: const Text(
                 "Yes",
@@ -142,8 +141,7 @@ logOutDialog(BuildContext context, WidgetRef ref) {
       });
 }
 
-Future<dynamic> showNameBottomSheet(
-    BuildContext context, String name, WidgetRef ref,
+showNameBottomSheet(BuildContext context, String name, WidgetRef ref,
     {bool isRoom = false, String? roomId}) {
   var newNameController = TextEditingController(text: name);
   return showModalBottomSheet(

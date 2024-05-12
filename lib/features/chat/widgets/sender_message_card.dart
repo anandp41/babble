@@ -32,7 +32,7 @@ class SenderMessageCard extends StatelessWidget {
     final isReplying = repliedText.isNotEmpty;
     final replyMinWidth = MediaQuery.of(context).size.width / 2;
     return SwipeTo(
-      onRightSwipe: () => onRightSwipe(),
+      onRightSwipe: (details) => onRightSwipe(),
       child: Align(
         alignment: Alignment.centerLeft,
         child: ConstrainedBox(

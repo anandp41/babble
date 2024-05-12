@@ -29,6 +29,7 @@ class _RoomControlsState extends ConsumerState<RoomControls> {
     if (image != null) {
       await ref.read(roomControllerProvider).updateRoomPhoto(
           roomPic: image, roomId: widget.roomData.roomId, ref: ref);
+      // ignore: unused_result
       ref.refresh(roomControllerProvider);
     }
     setState(() {});

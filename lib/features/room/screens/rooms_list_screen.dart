@@ -35,38 +35,63 @@ class _RoomsListScreenState extends ConsumerState<RoomsListScreen> {
         ),
         Expanded(
           child: ref.watch(userDataAuthProvider).when(
-              data: (userData) => userData!.roomId.isEmpty
-                  ? const ErrorScreen(error: "You are'nt in any room")
-                  : ListView.builder(
-                      itemCount: userData.roomId.length,
+              data: (userData) => StreamBuilder<List<String>>(
+                  stream:
+                      ref.watch(roomControllerProvider).getRoomsOfThisUSer(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            color: babbleTitleColor,
+                          ),
+                        ],
+                      );
+                    }
+                    if (snapshot.data!.isEmpty) {
+                      return const ErrorScreen(
+                          error: "You are'nt in any rooms");
+                    }
+                    List<String> rooms = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: rooms.length,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return FutureBuilder(
-                          future: ref
+                        return StreamBuilder(
+                          stream: ref
                               .watch(roomControllerProvider)
-                              .getDetailsOfRoom(userData.roomId[index]),
+                              .getDetailsThisRoomStream(roomId: rooms[index]),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              var roomData = snapshot.data;
-                              if (roomData!.name
-                                  .toUpperCase()
-                                  .contains(name.trim().toUpperCase())) {
-                                return RoomsListTile(
-                                  roomData: roomData,
-                                  userData: userData,
-                                );
-                              } else {
-                                return const SizedBox.shrink();
-                              }
+                                ConnectionState.waiting) {
+                              return const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator(
+                                    color: babbleTitleColor,
+                                  ),
+                                ],
+                              );
+                            }
+
+                            var roomData = snapshot.data;
+                            if (roomData!.name
+                                .toUpperCase()
+                                .contains(name.trim().toUpperCase())) {
+                              return RoomsListTile(
+                                roomData: roomData,
+                                userData: userData,
+                              );
                             } else {
                               return const SizedBox.shrink();
                             }
                           },
                         );
                       },
-                    ),
+                    );
+                  }),
               error: (error, stackTrace) => const ErrorScreen(
                     error: "Error fetching user data",
                   ),

@@ -36,7 +36,7 @@ class _SelectContactsRoomState extends ConsumerState<SelectContactsRoom> {
       }
       setState(() {
         ref
-            .read(selectedRoomContacts.state)
+            .read(selectedRoomContacts.notifier)
             .update((state) => [...state, contact]);
       });
     } else {
@@ -47,7 +47,7 @@ class _SelectContactsRoomState extends ConsumerState<SelectContactsRoom> {
       }
       setState(() {
         ref
-            .read(newMembersUids.state)
+            .read(newMembersUids.notifier)
             .update((state) => [...state, contact['uid']!]);
       });
     }
@@ -138,6 +138,7 @@ class _SelectContactsRoomState extends ConsumerState<SelectContactsRoom> {
                   })
               : RefreshIndicator(
                   onRefresh: () async {
+                    // ignore: unused_result
                     ref.refresh(savedContactsOnBabbleProvider);
                     ref
                         .read(selectContactControllerProvider)

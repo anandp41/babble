@@ -15,7 +15,7 @@ class MakeRoomAppBar extends ConsumerWidget {
       leading: IconButton(
           onPressed: () {
             Get.back();
-            ref.read(selectedRoomContacts.state).update((state) => []);
+            ref.read(selectedRoomContacts.notifier).update((state) => []);
           },
           icon: const Icon(
             Icons.arrow_back,

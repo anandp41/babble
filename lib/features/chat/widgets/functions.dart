@@ -28,7 +28,7 @@ String timeOrDate(DateTime timeSent) {
 void onMessageSwipe(
     String message, bool isMe, MessageEnum messageEnum, WidgetRef ref) {
   ref
-      .read(messageReplyProvider.state)
+      .read(messageReplyProvider.notifier)
       .update((state) => MessageReply(message, isMe, messageEnum));
 }
 

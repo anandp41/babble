@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/colors.dart';
+import '../../core/strings.dart';
 import 'appbar_back_button.dart';
 
 class CustomOTPAppBar extends StatelessWidget {
@@ -12,7 +13,7 @@ class CustomOTPAppBar extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       title: const Text(
-        'Babble',
+        appTitle,
         textAlign: TextAlign.center,
         style: TextStyle(
             color: babbleTitleColor,

@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../models/user_model.dart';
 import '../repositories/auth_repository.dart';
 
-final userDataAuthProvider = FutureProvider<UserModel?>((ref) {
+final userDataAuthProvider = FutureProvider<UserModel?>((ref) async {
   final authController = ref.watch(authControllerProvider);
-  return authController.getCurrentUserData();
+  return await authController.getCurrentUserData();
 });
 final smsDataProvider = FutureProvider((ref) async {
   final authController = ref.watch(authControllerProvider);
@@ -53,17 +53,18 @@ class AuthController {
   }
 
   Future<UserModel?> getCurrentUserData() async {
-    return await authRepository.getCurrentUserData();
-    //return user;
+    UserModel? user = await authRepository.getCurrentUserData();
+    return user;
   }
 
-  Stream<UserModel> getAUserData({required String uid}) {
-    return authRepository.userData(uid);
+  Stream<UserModel> getAUserDataAsStream({required String uid}) {
+    return authRepository.userDataAsStream(uid);
   }
 
-//  Stream<UserModel> userDataById(String userId) {
-//     return authRepository.userData(userId);
-  //}
+  Future<UserModel?> userDataById({required String userId}) async {
+    return await authRepository.userData(userId);
+  }
+
   Future<String> getSmsData() async {
     String data = await authRepository.getSmsData();
     return data;

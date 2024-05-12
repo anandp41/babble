@@ -11,7 +11,7 @@ class MessageReplyPreview extends ConsumerWidget {
   final String name;
   const MessageReplyPreview({super.key, required this.name});
   void cancelReply(WidgetRef ref) {
-    ref.read(messageReplyProvider.state).update((state) => null);
+    ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 
   @override

@@ -26,7 +26,8 @@ class _AddMemberToRoomScreenState extends ConsumerState<AddMemberToRoomScreen> {
         alreadyMemberUids: widget.alreadyMembers,
         newUids: ref.read(newMembersUids));
     Get.back();
-    ref.read(selectedRoomContacts.state).update((state) => []);
+    ref.read(selectedRoomContacts.notifier).update((state) => []);
+    // ignore: unused_result
     ref.refresh(roomControllerProvider);
   }
 

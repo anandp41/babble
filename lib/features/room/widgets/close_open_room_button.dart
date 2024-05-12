@@ -28,6 +28,7 @@ class CloseOpenRoomButton extends ConsumerWidget {
             } else {
               await ref.read(roomControllerProvider).closeRoom(roomId: roomId);
             }
+            // ignore: unused_result
             ref.refresh(roomControllerProvider);
           },
           child: Text(

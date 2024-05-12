@@ -21,8 +21,8 @@ class AuthRepository {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
   AuthRepository({required this.auth, required this.firestore});
-  // String? userPhoneNumber;
-  Stream<UserModel> userData(String userId) {
+
+  Stream<UserModel> userDataAsStream(String userId) {
     return firestore
         .collection(firebaseUsersCollection)
         .doc(userId)
@@ -42,15 +42,15 @@ class AuthRepository {
     return user;
   }
 
-  // Future<UserModel?> getAUserData(String uid) async {
-  //   var userData =
-  //       await firestore.collection(firebaseUsersCollection).doc(uid).get();
-  //   UserModel? user;
-  //   if (userData.data() != null) {
-  //     user = UserModel.fromMap(userData.data()!);
-  //   }
-  //   return user;
-  // }
+  Future<UserModel?> userData(String uid) async {
+    var userData =
+        await firestore.collection(firebaseUsersCollection).doc(uid).get();
+    UserModel? user;
+    if (userData.data() != null) {
+      user = UserModel.fromMap(userData.data()!);
+    }
+    return user;
+  }
 
   Future<String> getSmsData() async {
     String data = '';

@@ -33,6 +33,10 @@ class RoomController {
     return roomRepository.getRooms();
   }
 
+  Stream<List<String>> getRoomsOfThisUSer() =>
+      roomRepository.getRoomsOfThisUSer();
+  Stream<RoomModel> getDetailsThisRoomStream({required String roomId}) =>
+      roomRepository.getDetailsOfThisRoomStream(roomId);
   Future<void> removeAMember(
           {required String roomId, required String memberId}) async =>
       await roomRepository.removeAMember(roomId: roomId, memberId: memberId);
@@ -71,6 +75,7 @@ class RoomController {
   Future<void> deleteRoomPhoto(
           {required WidgetRef ref, required String roomId}) async =>
       await roomRepository.deleteRoomPhoto(roomId: roomId, ref: ref);
+
   Stream<List<String>>? getSpeakersStreamOfRoom({required String roomId}) {
     return roomRepository.getSpeakersStreamOfRoom(roomId);
   }
