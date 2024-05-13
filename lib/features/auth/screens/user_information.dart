@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../../core/misc.dart';
 import '../../../../../../core/strings.dart';
 import '../../../../../../core/textstyles.dart';
@@ -52,8 +51,6 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
       await ref
           .read(authControllerProvider)
           .saveUserDataToFirebase(name, image);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(loggedInSharedPrefsString, true);
 
       ref.read(savedContactsOnBabbleProvider);
       await ref

@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../common/functions/functions.dart';
 import '../../../common/repositories/common_firebase_repository.dart';
 import '../../../core/strings.dart';
@@ -103,8 +102,6 @@ class AuthRepository {
       await ref.read(commonFirebaseStorageRepositoryProvider).deleteFile(
           serverFilePath: 'Profile_Images/${auth.currentUser!.uid}');
 
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(loggedInSharedPrefsString, false);
       await firestore.terminate();
       await firestore.clearPersistence();
     } catch (e) {
@@ -114,8 +111,6 @@ class AuthRepository {
 
   Future<void> logOutOfWeb({required WidgetRef ref}) async {
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(loggedInSharedPrefsString, false);
       await auth.signOut();
       await firestore.terminate();
       await firestore.clearPersistence();
