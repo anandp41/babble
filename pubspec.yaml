@@ -1,14 +1,17 @@
 name: babble
 description: "A social audio room app for your gang"
 publish_to: 'none'
-version: 1.0.2+3
+version: 1.0.3+4
 environment:
   sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
   audioplayers: ^6.0.0
   cached_network_image: ^3.3.1
-  cached_video_player: ^2.0.4
+  cached_video_player:
+    git:
+      url: https://github.com/vikram25897/flutter_cached_video_player
+      ref: feature/gradle_version_bump
   cloud_firestore: ^4.15.10
   country_code_picker: ^3.0.0
   cupertino_icons: ^1.0.6
@@ -38,7 +41,6 @@ dependencies:
   permission_handler: ^11.3.1
   photo_view: ^0.15.0
   pinput: ^4.0.0
-  shared_preferences: ^2.2.3
   swipe_to: ^1.0.2
   transparent_image: ^2.0.1
   url_launcher: ^6.2.6

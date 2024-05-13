@@ -7,7 +7,6 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/strings.dart';
 import '../../../common/widgets/babble_title.dart';
 import '../../../core/colors.dart';
@@ -22,11 +21,9 @@ class ScreenSplash extends ConsumerStatefulWidget {
 }
 
 class _ScreenSplashState extends ConsumerState<ScreenSplash> {
-  bool _imageLoaded = false;
   @override
   void initState() {
     super.initState();
-
     timerCumGetStartedImageCacher();
   }
 
@@ -48,19 +45,14 @@ class _ScreenSplashState extends ConsumerState<ScreenSplash> {
   Timer timerCumGetStartedImageCacher() {
     return Timer(const Duration(seconds: 2), () async {
       await _loadImage();
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
       if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
         await FlutterContacts.requestPermission();
       }
-      if (_imageLoaded) {
-        // Get.off
-        bool? loggedIn = prefs.getBool(loggedInSharedPrefsString);
-        if (FirebaseAuth.instance.currentUser != null ||
-            (loggedIn != null && loggedIn == true)) {
-          Get.off(() => const Home());
-        } else {
-          Get.off(() => const ScreenGetStarted());
-        }
+      bool loggedIn = FirebaseAuth.instance.currentUser != null;
+      if (loggedIn == true) {
+        Get.off(() => const Home());
+      } else {
+        Get.off(() => const ScreenGetStarted());
       }
     });
   }
@@ -78,8 +70,6 @@ class _ScreenSplashState extends ConsumerState<ScreenSplash> {
           ),
           // ignore: use_build_context_synchronously
           context);
-
-      _imageLoaded = true;
     } catch (e) {
       debugPrint('Error loading images for cache: $e');
     }

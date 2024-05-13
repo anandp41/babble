@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +15,9 @@ import 'core/strings.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
+  log("1");
   WidgetsFlutterBinding.ensureInitialized();
+  log("2");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -23,25 +27,29 @@ Future<void> main() async {
       androidProvider: AndroidProvider.debug,
       appleProvider: AppleProvider.debug,
     );
+    log("3a");
   } else {
     await FirebaseAppCheck.instance.activate(
       androidProvider: AndroidProvider.playIntegrity,
       appleProvider: AppleProvider.appAttest,
       webProvider: ReCaptchaV3Provider(reCaptchaV3ProviderSiteKey),
     );
+    log("3b");
   }
 
   if (!kIsWeb) {
     FlutterError.onError = (errorDetails) async {
       await FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
     };
+    log("4");
     // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
     PlatformDispatcher.instance.onError = (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+    log("5");
   }
-
+  log("6");
   runApp(const ProviderScope(
     child: MyApp(),
   ));
