@@ -17,9 +17,9 @@ class CloseOpenRoomButton extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ElevatedButton(
           style: ButtonStyle(
-              shape: const MaterialStatePropertyAll(RoundedRectangleBorder(
+              shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)))),
-              backgroundColor: MaterialStatePropertyAll(isRoomClosed
+              backgroundColor: WidgetStatePropertyAll(isRoomClosed
                   ? roomControlCloseRoomButtonGreenColor
                   : roomControlCloseRoomButtonRedColor)),
           onPressed: () async {

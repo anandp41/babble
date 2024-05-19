@@ -146,7 +146,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                   },
                   style: const ButtonStyle(
                       backgroundColor:
-                          MaterialStatePropertyAll(babbleTitleColor)),
+                          WidgetStatePropertyAll(babbleTitleColor)),
                   icon: processing
                       ? const CircularProgressIndicator(
                           color: Colors.white,

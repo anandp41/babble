@@ -11,9 +11,9 @@ import '../functions/functions.dart';
 class Utils {
   static Future<File?> pickImageFromGallery() async {
     File? image;
+    var picker = ImagePicker();
     try {
-      final pickedImage =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
+      final pickedImage = await picker.pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
         image = File(pickedImage.path);
       }

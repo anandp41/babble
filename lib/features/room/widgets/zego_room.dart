@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 import 'package:zego_uikit_prebuilt_live_audio_room/zego_uikit_prebuilt_live_audio_room.dart';
 import '../../../../../core/radii.dart';
 import '../../../../../core/strings.dart';
@@ -31,11 +30,18 @@ class LiveAudioRoomPage extends ConsumerWidget {
         future: ref.read(roomControllerProvider).getDetailsOfRoom(roomId),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: babbleTitleColor,
-            ));
+            return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  color: babbleTitleColor,
+                ),
+              ],
+            );
           }
+          var roomConfig = isHost
+              ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
+              : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience();
           return ZegoUIKitPrebuiltLiveAudioRoom(
             events: ZegoUIKitPrebuiltLiveAudioRoomEvents(
               onLeaveConfirmation: (event, defaultAction) async {
@@ -43,9 +49,8 @@ class LiveAudioRoomPage extends ConsumerWidget {
                     .read(roomControllerProvider)
                     .removePhoneNumberAsSpeaking(
                         roomId: roomId, phoneNumber: userData!.phoneNumber);
-                Get.back();
 
-                return defaultAction.call();
+                return await defaultAction.call();
               },
             ),
             appID: ZegoCloudConfig.appId, // your AppID,
@@ -53,10 +58,9 @@ class LiveAudioRoomPage extends ConsumerWidget {
             userID: userData!.uid,
             userName: userData!.phoneNumber,
             roomID: roomId,
-            config: (isHost
-                ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
-                : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience())
+            config: roomConfig
               ..seat = ZegoLiveAudioRoomSeatConfig(
+                  takeIndexWhenJoining: isHost ? 0 : -1,
                   avatarBuilder: (context, size, user, extraInfo) {
                     if (user!.microphone.value) {
                       Future(() => ref
@@ -125,6 +129,7 @@ class LiveAudioRoomPage extends ConsumerWidget {
                       ),
                     );
                   },
+                  hostIndexes: const [0],
                   showSoundWaveInAudioMode: true)
               ..duration = ZegoLiveAudioRoomLiveDurationConfig(isVisible: true)
               ..useSpeakerWhenJoining = false

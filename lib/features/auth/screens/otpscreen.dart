@@ -76,13 +76,13 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                       : Get.offAll(() => const UserInformationScreen());
                 },
                 style: ButtonStyle(
-                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8))),
-                    fixedSize: const MaterialStatePropertyAll(
-                        Size(double.infinity, 56)),
-                    maximumSize: const MaterialStatePropertyAll(Size(1200, 56)),
+                    fixedSize:
+                        const WidgetStatePropertyAll(Size(double.infinity, 56)),
+                    maximumSize: const WidgetStatePropertyAll(Size(1200, 56)),
                     backgroundColor:
-                        const MaterialStatePropertyAll(otpVerifyButtonBg)),
+                        const WidgetStatePropertyAll(otpVerifyButtonBg)),
                 child: const Text(
                   "Verify",
                   style: sendVerifyOTPButtonTextstyle,

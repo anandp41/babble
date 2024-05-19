@@ -56,9 +56,15 @@ class DisplayTextImageGIF extends StatelessWidget {
                     ));
               })
             : type == MessageEnum.video
-                ? VideoPlayerItem(videoUrl: message)
+                ? Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(messageBorderRadius))),
+                    child: VideoPlayerItem(videoUrl: message))
                 : type == MessageEnum.gif
                     ? Container(
+                        clipBehavior: Clip.hardEdge,
                         decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(
                                 Radius.circular(messageBorderRadius))),

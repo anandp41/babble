@@ -95,8 +95,13 @@ class _RoomsListScreenState extends ConsumerState<RoomsListScreen> {
               error: (error, stackTrace) => const ErrorScreen(
                     error: "Error fetching user data",
                   ),
-              loading: () => const CircularProgressIndicator(
-                    color: babbleTitleColor,
+              loading: () => const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: babbleTitleColor,
+                      ),
+                    ],
                   )),
         ),
         const SizedBox(

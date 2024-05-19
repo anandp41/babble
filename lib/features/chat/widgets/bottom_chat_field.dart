@@ -70,6 +70,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
           _messageController.text.trim(), widget.receiverUserId);
       setState(() {
         _messageController.clear();
+        isShowSendButton = false;
       });
     } else {
       if (!isRecorderInit) {
@@ -251,7 +252,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             selectDocument();
                           },
                           icon: const Icon(
-                            Icons.attach_file,
+                            Icons.picture_as_pdf,
                             color: Colors.grey,
                           ),
                         ),

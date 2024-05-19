@@ -88,15 +88,13 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                   await sendPhoneNumber();
                 },
                 style: ButtonStyle(
-                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(messageBorderRadius))),
-                    fixedSize:
-                        const MaterialStatePropertyAll(otpButtonFixedSize),
-                    maximumSize:
-                        const MaterialStatePropertyAll(otpButtonMaxSize),
+                    fixedSize: const WidgetStatePropertyAll(otpButtonFixedSize),
+                    maximumSize: const WidgetStatePropertyAll(otpButtonMaxSize),
                     backgroundColor:
-                        const MaterialStatePropertyAll(otpVerifyButtonBg)),
+                        const WidgetStatePropertyAll(otpVerifyButtonBg)),
                 child: const Text(
                   "Send OTP",
                   style: sendVerifyOTPButtonTextstyle,
