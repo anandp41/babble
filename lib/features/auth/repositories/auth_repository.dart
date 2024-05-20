@@ -172,6 +172,15 @@ class AuthRepository {
     }
   }
 
+  Future<List<String>> roomsIfAlreadyRegd() async {
+    var userDataInServer = await userData(auth.currentUser!.uid);
+    List<String> rooms = [];
+    if (userDataInServer != null) {
+      rooms = userDataInServer.roomId;
+    }
+    return rooms;
+  }
+
   Future<void> saveUserDataToFirebase(
       {required String name,
       required File? profilePic,
@@ -185,13 +194,15 @@ class AuthRepository {
             .storeFileToFirebase(
                 serverFilePath: 'Profile_Images/$uid', file: profilePic);
       }
+
+      List<String> rooms = await roomsIfAlreadyRegd();
       var user = UserModel(
         name: name,
         uid: uid,
         profilePic: photoUrl,
         isOnline: true,
         phoneNumber: auth.currentUser!.phoneNumber.toString(),
-        roomId: [],
+        roomId: rooms,
         savedContacts: [],
       );
       await firestore
